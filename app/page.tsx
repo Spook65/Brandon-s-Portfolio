@@ -42,32 +42,22 @@ export default function Portfolio() {
       {/* Orbital nodes that react to scroll */}
       {/* <AxisNodes scrollProgress={scrollYProgress} /> */}
 
-      {/* SECTION 01: INITIATE */}
+      {/* SECTION 00: SIGNAL */}
       <Section index={0} scrollProgress={scrollYProgress}>
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto px-6 pointer-events-auto">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, delay: 0.5 }}
-            className="space-y-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center space-y-8"
           >
-            <div className="font-mono text-xs text-blue-400/60 tracking-[0.3em]">00_INITIATE</div>
-
-            <div className="space-y-6">
-              <h1 className="text-[8rem] md:text-[12rem] leading-[0.85] font-bold tracking-tighter">
-                BRANDON
-                <br />
-                <span className="text-blue-500">HANN</span>
-              </h1>
-
-              <p className="text-2xl text-gray-400 max-w-xl leading-relaxed">
-                Engineering systems that scale. Building interfaces that matter.
-              </p>
-            </div>
-
-            <div className="flex gap-4 pt-8">
+            <h1 className="text-7xl md:text-8xl font-bold tracking-tighter text-balance">Brandon Huang</h1>
+            <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto text-pretty">
+              Computer Science Student → Systems Architect → Builder of functional, intentional software
+            </p>
+            <div className="flex gap-4 justify-center pt-4">
               <a
-                href="https://github.com/Spook65"
+                href="https://github.com/yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="pointer-events-auto inline-flex items-center justify-center gap-2 h-11 px-8 rounded-md border border-gray-700 hover:border-blue-500 bg-transparent transition-colors duration-300 cursor-pointer text-sm font-medium"
@@ -80,7 +70,7 @@ export default function Portfolio() {
         </div>
       </Section>
 
-      {/* SECTION 02: TRAJECTORY */}
+      {/* SECTION 01: TRAJECTORY */}
       <Section index={1} scrollProgress={scrollYProgress}>
         <div className="max-w-3xl mx-auto px-6">
           <div className="space-y-16">
@@ -119,8 +109,54 @@ export default function Portfolio() {
         </div>
       </Section>
 
-      {/* SECTION 03: ARTIFACTS */}
+      {/* SECTION 02: SYSTEMS */}
       <Section index={2} scrollProgress={scrollYProgress}>
+        <div className="max-w-5xl mx-auto px-6 pointer-events-auto">
+          <h2 className="text-5xl font-bold mb-16 text-center">Systems</h2>
+          <div className="space-y-20">
+            <ProjectEntry
+              title="Task Management API"
+              description="RESTful API with role-based auth, rate limiting, and PostgreSQL. Handles 10K+ req/min."
+              tech={["Node.js", "Express", "PostgreSQL", "Redis"]}
+              features={[
+                "JWT-based authentication with refresh tokens",
+                "Redis caching layer for frequently accessed data",
+                "Comprehensive API documentation with Swagger",
+                "Docker containerization for consistent deployments",
+              ]}
+              codeUrl="https://github.com/yourusername/task-api"
+              demoUrl="https://task-api-demo.vercel.app"
+            />
+            <ProjectEntry
+              title="Real-time Chat System"
+              description="WebSocket-based chat with typing indicators, read receipts, and message persistence."
+              tech={["React", "Socket.io", "MongoDB", "Node.js"]}
+              features={[
+                "Real-time bidirectional communication",
+                "Markdown support for rich text formatting",
+                "File upload with drag-and-drop interface",
+                "Message encryption for secure conversations",
+              ]}
+              codeUrl="https://github.com/yourusername/chat-system"
+            />
+            <ProjectEntry
+              title="E-commerce Dashboard"
+              description="Admin panel for inventory management, analytics, and order processing."
+              tech={["Next.js", "TypeScript", "Prisma", "TailwindCSS"]}
+              features={[
+                "Interactive data visualizations with Recharts",
+                "Real-time inventory tracking and alerts",
+                "Bulk product import via CSV parsing",
+                "Role-based access control for team members",
+              ]}
+              demoUrl="https://ecommerce-dashboard-demo.vercel.app"
+            />
+          </div>
+        </div>
+      </Section>
+
+      {/* SECTION 03: ARTIFACTS */}
+      <Section index={3} scrollProgress={scrollYProgress}>
         <div className="max-w-5xl mx-auto px-6">
           <div className="space-y-20">
             <div className="font-mono text-xs text-blue-400/60 tracking-[0.3em]">02_PROJECTS</div>
@@ -155,26 +191,22 @@ export default function Portfolio() {
       </Section>
 
       {/* SECTION 04: FRAMEWORK */}
-      <Section index={3} scrollProgress={scrollYProgress}>
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="space-y-16">
-            <div className="font-mono text-xs text-blue-400/60 tracking-[0.3em]">03_TECH_STACK</div>
+      <Section index={4} scrollProgress={scrollYProgress}>
+        <div className="max-w-4xl mx-auto px-6 pointer-events-auto">
+          <h2 className="text-5xl font-bold mb-16 text-center">Framework</h2>
 
-            <h2 className="text-6xl md:text-8xl font-bold leading-tight">Technology arsenal</h2>
+          <TechStackIcons />
 
-            <TechStackIcons />
-
-            <p className="text-lg text-gray-400 leading-relaxed pt-8">
-              Specializing in distributed systems, real-time applications, and developer tooling. Focused on writing
-              code that ships and systems that scale.
-            </p>
-          </div>
+          <p className="text-lg text-gray-400 leading-relaxed pt-8">
+            Specializing in distributed systems, real-time applications, and developer tooling. Focused on writing code
+            that ships and systems that scale.
+          </p>
         </div>
       </Section>
 
       {/* SECTION 05: NEXUS */}
-      <Section index={4} scrollProgress={scrollYProgress}>
-        <div className="max-w-3xl mx-auto px-6">
+      <Section index={5} scrollProgress={scrollYProgress}>
+        <div className="max-w-3xl mx-auto px-6 pointer-events-auto">
           <div className="space-y-16">
             <div className="font-mono text-xs text-blue-400/60 tracking-[0.3em]">04_CONTACT</div>
 
@@ -242,8 +274,8 @@ function Section({
   index: number
   scrollProgress: any
 }) {
-  const sectionStart = index / 5
-  const sectionEnd = (index + 1) / 5
+  const sectionStart = index / 6
+  const sectionEnd = (index + 1) / 6
 
   const opacity = useTransform(
     scrollProgress,
@@ -301,30 +333,37 @@ function ProjectEntry({
   tech,
   githubUrl,
   demoUrl,
+  features,
+  codeUrl,
 }: {
-  number: string
+  number?: string
   title: string
   description: string
   tech: string[]
   githubUrl: string
   demoUrl?: string
+  features?: string[]
+  codeUrl?: string
 }) {
   return (
     <div className="border-l-2 border-blue-500/30 pl-8 space-y-6 group hover:border-blue-500/60 transition-colors duration-500">
       <div className="flex items-baseline gap-4">
-        <div className="font-mono text-sm text-blue-400/60">/{number}</div>
+        {number && <div className="font-mono text-sm text-blue-400/60">/{number}</div>}
         <h3 className="text-3xl md:text-4xl font-bold">{title}</h3>
       </div>
 
       <p className="text-lg text-gray-400 leading-relaxed">{description}</p>
 
-      <div className="flex flex-wrap gap-2">
-        {tech.map((item) => (
-          <span key={item} className="px-3 py-1 text-sm border border-gray-800 text-gray-500 font-mono">
-            {item}
-          </span>
-        ))}
-      </div>
+      {features && (
+        <div className="space-y-2">
+          {features.map((feature, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span className="text-sm font-mono text-gray-400">{feature}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="flex gap-3 pt-2">
         <Button
@@ -333,7 +372,7 @@ function ProjectEntry({
           className="border-gray-700 hover:border-blue-500 transition-colors bg-transparent"
           asChild
         >
-          <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+          <a href={githubUrl || codeUrl} target="_blank" rel="noopener noreferrer">
             <Github className="mr-2 h-3 w-3" />
             Code
           </a>

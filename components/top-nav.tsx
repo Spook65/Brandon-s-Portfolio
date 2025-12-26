@@ -10,7 +10,7 @@ export function TopNav() {
     { id: "home", label: "Home" },
     { id: "resume", label: "Resume" },
     { id: "projects", label: "Projects" },
-    { id: "tech-stack", label: "Tech Stack" },
+    { id: "tech-stack", label: "Stack" },
     { id: "contact", label: "Contact" },
   ]
 
@@ -43,19 +43,19 @@ export function TopNav() {
     // Each section spans 0.2 of progress, scroll to middle (0.1, 0.3, 0.5, 0.7, 0.9)
     switch (sectionId) {
       case "home":
-        scrollTarget = totalHeight * 0.1
-        break
-      case "resume":
-        scrollTarget = totalHeight * 0.3
-        break
-      case "projects":
         scrollTarget = totalHeight * 0.5
         break
+      case "resume":
+        scrollTarget = totalHeight * 0.384
+        break
+      case "projects":
+        scrollTarget = totalHeight * 0.595
+        break
       case "tech-stack":
-        scrollTarget = totalHeight * 0.7
+        scrollTarget = totalHeight * 0.725
         break
       case "contact":
-        scrollTarget = totalHeight * 0.9
+        scrollTarget = totalHeight * 0.95
         break
     }
 
