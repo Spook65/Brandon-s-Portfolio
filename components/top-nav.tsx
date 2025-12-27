@@ -10,7 +10,7 @@ export function TopNav() {
     { id: "home", label: "Home" },
     { id: "resume", label: "Resume" },
     { id: "projects", label: "Projects" },
-    { id: "tech-stack", label: "Stack" },
+    { id: "stack", label: "Stack" },
     { id: "contact", label: "Contact" },
   ]
 
@@ -19,7 +19,6 @@ export function TopNav() {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight
       const scrollProgress = window.scrollY / totalHeight
 
-      // Each section is active when scroll progress is within its range
       if (scrollProgress < 0.2)
         setActiveSection("home") // 0 - 0.2
       else if (scrollProgress < 0.4)
@@ -27,39 +26,20 @@ export function TopNav() {
       else if (scrollProgress < 0.6)
         setActiveSection("projects") // 0.4 - 0.6
       else if (scrollProgress < 0.8)
-        setActiveSection("tech-stack") // 0.6 - 0.8
+        setActiveSection("stack") // 0.6 - 0.8
       else setActiveSection("contact") // 0.8 - 1.0
     }
 
     window.addEventListener("scroll", handleScroll)
-    handleScroll() // Call once on mount to set initial state
+    handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const scrollToSection = (sectionId: string) => {
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight
-    let scrollTarget = 0
-
-    // Each section spans 0.2 of progress, scroll to middle (0.1, 0.3, 0.5, 0.7, 0.9)
-    switch (sectionId) {
-      case "home":
-        scrollTarget = totalHeight * 0.5
-        break
-      case "resume":
-        scrollTarget = totalHeight * 0.384
-        break
-      case "projects":
-        scrollTarget = totalHeight * 0.595
-        break
-      case "tech-stack":
-        scrollTarget = totalHeight * 0.725
-        break
-      case "contact":
-        scrollTarget = totalHeight * 0.95
-        break
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
     }
-
-    window.scrollTo({ top: scrollTarget, behavior: "smooth" })
   }
 
   return (
