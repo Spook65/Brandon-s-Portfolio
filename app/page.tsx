@@ -14,7 +14,7 @@ export default function Portfolio() {
         <div className="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
           <div className="font-mono text-xs tracking-wider text-neutral-500">BRANDON H.</div>
           <div className="flex gap-8 text-sm">
-            {["About", "Work", "Stack", "Contact"].map((item) => (
+            {["About", "Stack", "Work", "Contact"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
