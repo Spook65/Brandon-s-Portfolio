@@ -5,6 +5,81 @@ import { Github, Linkedin, Mail, ExternalLink, Code2, X, Sparkles } from "lucide
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
+const TerminalTyping = () => {
+  const [displayText, setDisplayText] = useState("")
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [cursorVisible, setCursorVisible] = useState(true)
+
+  // Typing loop: cycles through phrases, types character-by-character, pauses, then deletes
+  const phrases = ["Brandon Huynh", "Computer Science Major", "Cybersecurity Concentration"]
+
+  useEffect(() => {
+    const currentPhrase = phrases[currentIndex]
+
+    // Cursor blink effect: toggles every 500ms for subtle blinking
+    const cursorInterval = setInterval(() => {
+      setCursorVisible((prev) => !prev)
+    }, 500)
+
+    // Typing/deleting logic: simulates terminal character-by-character input
+    const typingSpeed = isDeleting ? 50 : 100 // Faster delete, slower type
+    const pauseDuration = isDeleting ? 0 : 1500 // Pause after typing completes
+
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting && displayText === currentPhrase) {
+          // Finished typing, pause then start deleting
+          setIsDeleting(true)
+        } else if (isDeleting && displayText === "") {
+          // Finished deleting, move to next phrase
+          setIsDeleting(false)
+          setCurrentIndex((prev) => (prev + 1) % phrases.length)
+        } else if (isDeleting) {
+          // Delete one character
+          setDisplayText(currentPhrase.substring(0, displayText.length - 1))
+        } else {
+          // Type one character
+          setDisplayText(currentPhrase.substring(0, displayText.length + 1))
+        }
+      },
+      displayText === currentPhrase && !isDeleting ? pauseDuration : typingSpeed,
+    )
+
+    return () => {
+      clearTimeout(timeout)
+      clearInterval(cursorInterval)
+    }
+  }, [displayText, currentIndex, isDeleting])
+
+  return (
+    <div className="absolute bottom-12 right-12 max-w-sm">
+      {/* Terminal window with monospace text and blinking cursor */}
+      <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-sm p-4">
+        <div className="flex gap-2 mb-3">
+          <div className="w-3 h-3 rounded-full bg-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+        </div>
+        <div className="font-mono text-sm text-neutral-300">
+          <span className="text-blue-400">$</span> {displayText}
+          <span className={`inline-block w-2 h-4 bg-neutral-300 ml-1 ${cursorVisible ? "opacity-100" : "opacity-0"}`} />
+        </div>
+      </div>
+
+      {/* Minimal keyboard illustration: flat, stylized, low opacity */}
+      <div className="mt-3 flex justify-center gap-1 opacity-20">
+        <div className="w-3 h-3 border border-white/50 rounded-[1px]" />
+        <div className="w-3 h-3 border border-white/50 rounded-[1px]" />
+        <div className="w-3 h-3 border border-white/50 rounded-[1px]" />
+        <div className="w-8 h-3 border border-white/50 rounded-[1px]" />
+        <div className="w-3 h-3 border border-white/50 rounded-[1px]" />
+        <div className="w-3 h-3 border border-white/50 rounded-[1px]" />
+      </div>
+    </div>
+  )
+}
+
 function SystemsModeToggle() {
   // Load Systems Mode preference from localStorage on mount
   const [systemsMode, setSystemsMode] = useState(false)
@@ -153,6 +228,96 @@ function AssistantHint() {
   )
 }
 
+function EasterEgg() {
+  const [visible, setVisible] = useState(false)
+  const keySequence = useRef<string[]>([])
+
+  useEffect(() => {
+    // Easter egg: Konami-style sequence (↑ ↑ ↓ ↓ A) or Ctrl+Shift+E
+    // Tracks key presses to detect secret sequence without interfering with normal navigation
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Alternative shortcut: Ctrl + Shift + E
+      if (e.ctrlKey && e.shiftKey && e.key === "E") {
+        e.preventDefault()
+        showEasterEgg()
+        return
+      }
+
+      // Don't track keys when typing in inputs/textareas
+      if (["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) {
+        return
+      }
+
+      // Track arrow keys and 'A' for Konami-style sequence
+      const key = e.key
+      if (["ArrowUp", "ArrowDown", "a", "A"].includes(key)) {
+        keySequence.current.push(key)
+
+        // Keep only last 5 keys to match sequence length
+        if (keySequence.current.length > 5) {
+          keySequence.current.shift()
+        }
+
+        // Check if sequence matches: ↑ ↑ ↓ ↓ A (case-insensitive for A)
+        const sequence = keySequence.current
+        if (
+          sequence.length === 5 &&
+          sequence[0] === "ArrowUp" &&
+          sequence[1] === "ArrowUp" &&
+          sequence[2] === "ArrowDown" &&
+          sequence[3] === "ArrowDown" &&
+          (sequence[4] === "a" || sequence[4] === "A")
+        ) {
+          showEasterEgg()
+          keySequence.current = [] // Reset sequence after successful trigger
+        }
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+
+    // Cleanup: remove event listener on unmount to prevent memory leaks
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [])
+
+  const showEasterEgg = () => {
+    setVisible(true)
+
+    // Auto-dismiss after 3 seconds
+    setTimeout(() => {
+      setVisible(false)
+    }, 3000)
+  }
+
+  if (!visible) return null
+
+  return (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none"
+      style={{ animation: "fadeIn 0.3s ease-out" }}
+    >
+      {/* Terminal-inspired overlay toast */}
+      <div
+        className="pointer-events-auto bg-neutral-900/95 border border-neutral-700 rounded-lg px-6 py-4 max-w-md shadow-2xl cursor-pointer"
+        onClick={() => setVisible(false)}
+      >
+        <div className="flex items-start gap-3">
+          <Sparkles className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <div className="font-mono text-xs text-neutral-500 mb-1">EASTER_EGG_FOUND</div>
+            <p className="text-sm text-neutral-200 leading-relaxed">
+              You found this. I build systems — and I care about details.
+            </p>
+            <div className="mt-2 font-mono text-xs text-neutral-600">Click to dismiss</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Portfolio() {
   // Uses Framer Motion's useScroll which is optimized and doesn't cause reflows
   const { scrollYProgress } = useScroll()
@@ -171,6 +336,8 @@ export default function Portfolio() {
       <AssistantHint />
 
       <SystemsModeToggle />
+
+      <EasterEgg />
 
       <div className="fixed inset-0 pointer-events-none">
         {/* Base gradient for depth */}
@@ -240,6 +407,8 @@ export default function Portfolio() {
             </div>
           </div>
         </FadeInSection>
+
+        <TerminalTyping />
       </section>
 
       <section id="about" className="relative py-32 px-6">
