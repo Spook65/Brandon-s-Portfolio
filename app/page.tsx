@@ -60,7 +60,7 @@ export default function Portfolio() {
       </nav>
 
       <section className="relative min-h-screen flex items-center justify-center px-6" id="hero">
-        <FadeInSection>
+        <FadeInSection delay={0}>
           <div className="max-w-5xl w-full pt-20">
             <h1 className="text-[clamp(3rem,8vw,7rem)] font-bold leading-[0.95] tracking-tight mb-8">
               Building systems
@@ -93,7 +93,7 @@ export default function Portfolio() {
 
       <section id="about" className="relative py-32 px-6">
         <div className="max-w-5xl mx-auto">
-          <FadeInSection>
+          <FadeInSection delay={200}>
             <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 -ml-16 hidden md:block">
               01 / ABOUT
             </div>
@@ -123,35 +123,12 @@ export default function Portfolio() {
       <section id="stack" className="relative py-32 px-6 border-t border-white/5">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="max-w-5xl mx-auto">
-          <FadeInSection>
+          <FadeInSection delay={400}>
             <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 -mr-16 text-right hidden md:block">
               02 / STACK
             </div>
             <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 md:hidden">02 / STACK</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { name: "React", icon: "⚛️" },
-                { name: "TypeScript", icon: "📘" },
-                { name: "Next.js", icon: "▲" },
-                { name: "Node.js", icon: "🟢" },
-                { name: "Tailwind", icon: "🎨" },
-                { name: "PostgreSQL", icon: "🐘" },
-                { name: "Git", icon: "🔱" },
-                { name: "Framer", icon: "🎬" },
-              ].map((tech) => (
-                <div
-                  key={tech.name}
-                  className="p-6 border border-white/5 rounded-sm hover:border-white/20 transition-all duration-300 group"
-                >
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {tech.icon}
-                  </div>
-                  <div className="font-medium text-sm text-neutral-400 group-hover:text-white transition-colors duration-300">
-                    {tech.name}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <SkillsMap />
           </FadeInSection>
         </div>
       </section>
@@ -159,56 +136,264 @@ export default function Portfolio() {
       <section id="work" className="relative py-32 px-6 border-t border-white/5">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/10 via-transparent to-transparent" />
         <div className="max-w-5xl mx-auto">
-          <FadeInSection>
-            <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 -ml-16 hidden md:block">
-              03 / SELECTED WORK
+          <FadeInSection delay={600}>
+            <div className="flex items-center justify-between mb-8">
+              <div className="font-mono text-xs tracking-wider text-neutral-600">PROJECT 01</div>
+              <div className="relative w-10 h-10" aria-hidden="true">
+                <svg className="w-10 h-10 transform -rotate-90" viewBox="0 0 36 36">
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="text-neutral-800"
+                  />
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray="95 100"
+                    strokeLinecap="round"
+                    className="text-neutral-700 transition-all duration-1000 ease-out"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-[10px] font-mono text-neutral-700">95%</span>
+                </div>
+              </div>
             </div>
-            <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 md:hidden">03 / SELECTED WORK</div>
-            <div className="space-y-24">
-              <ProjectCard
-                number="01"
-                title="E-commerce Dashboard"
-                description="Admin panel for inventory management, analytics, and order processing. Built with React Server Components and streaming patterns for optimal performance."
-                tech={["Next.js 15", "TypeScript", "Prisma", "Recharts"]}
-                features={[
-                  "Interactive data visualizations with real-time updates",
-                  "CSV import with validation and error handling",
-                  "Role-based access control for team collaboration",
-                  "Optimistic UI updates for instant feedback",
-                ]}
-                codeUrl="https://github.com/yourusername/ecommerce-dashboard"
-                demoUrl="https://ecommerce-dashboard.vercel.app"
-              />
-
-              <ProjectCard
-                number="02"
-                title="Real-time Chat System"
-                description="WebSocket-based chat application with typing indicators, read receipts, and message persistence. Handles 100+ concurrent connections with minimal latency."
-                tech={["React", "Socket.io", "MongoDB", "Express"]}
-                features={[
-                  "Real-time bidirectional communication",
-                  "Markdown support for rich text formatting",
-                  "Drag-and-drop file uploads with preview",
-                  "End-to-end encryption for secure messaging",
-                ]}
-                codeUrl="https://github.com/yourusername/chat-system"
-                demoUrl="https://chat-system.vercel.app"
-              />
-
-              <ProjectCard
-                number="03"
-                title="Distributed Task Engine"
-                description="Task management system supporting 500+ concurrent users. Features offline-first architecture with intelligent conflict resolution for collaborative editing."
-                tech={["Next.js", "PostgreSQL", "Redis", "WebSocket"]}
-                features={[
-                  "Offline-first with local state sync",
-                  "Zero-latency updates across clients",
-                  "Intelligent conflict resolution",
-                  "Real-time collaborative workspaces",
-                ]}
-                codeUrl="https://github.com/yourusername/task-engine"
-                demoUrl="https://task-engine.vercel.app"
-              />
+            <div className="grid md:grid-cols-12 gap-12">
+              <div className="md:col-span-5 space-y-8">
+                <h3 className="text-4xl md:text-5xl font-bold leading-tight group-hover:text-neutral-400 transition-colors duration-300">
+                  E-commerce Dashboard
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Next.js 15", "TypeScript", "Prisma", "Recharts"].map((item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-sm text-xs font-mono text-neutral-400"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-3 pt-4">
+                  <a
+                    href="https://github.com/yourusername/ecommerce-dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+                  >
+                    <Code2 className="h-4 w-4" />
+                    Code
+                  </a>
+                  <a
+                    href="https://ecommerce-dashboard.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Demo
+                  </a>
+                </div>
+              </div>
+              <div className="md:col-span-7 space-y-8">
+                <p className="text-lg text-neutral-400 leading-relaxed">
+                  Admin panel for inventory management, analytics, and order processing. Built with React Server
+                  Components and streaming patterns for optimal performance.
+                </p>
+                <div className="space-y-3">
+                  {[
+                    "Interactive data visualizations with real-time updates",
+                    "CSV import with validation and error handling",
+                    "Role-based access control for team collaboration",
+                    "Optimistic UI updates for instant feedback",
+                  ].map((feature, i) => (
+                    <div key={i} className="flex gap-3 text-neutral-500">
+                      <span className="text-neutral-700 mt-1.5">•</span>
+                      <span className="text-sm leading-relaxed">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between mb-8 mt-24">
+              <div className="font-mono text-xs tracking-wider text-neutral-600">PROJECT 02</div>
+              <div className="relative w-10 h-10" aria-hidden="true">
+                <svg className="w-10 h-10 transform -rotate-90" viewBox="0 0 36 36">
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="text-neutral-800"
+                  />
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray="80 100"
+                    strokeLinecap="round"
+                    className="text-neutral-700 transition-all duration-1000 ease-out"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-[10px] font-mono text-neutral-700">80%</span>
+                </div>
+              </div>
+            </div>
+            <div className="grid md:grid-cols-12 gap-12">
+              <div className="md:col-span-5 space-y-8">
+                <h3 className="text-4xl md:text-5xl font-bold leading-tight group-hover:text-neutral-400 transition-colors duration-300">
+                  Real-time Chat System
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {["React", "Socket.io", "MongoDB", "Express"].map((item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-sm text-xs font-mono text-neutral-400"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-3 pt-4">
+                  <a
+                    href="https://github.com/yourusername/chat-system"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+                  >
+                    <Code2 className="h-4 w-4" />
+                    Code
+                  </a>
+                  <a
+                    href="https://chat-system.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Demo
+                  </a>
+                </div>
+              </div>
+              <div className="md:col-span-7 space-y-8">
+                <p className="text-lg text-neutral-400 leading-relaxed">
+                  WebSocket-based chat application with typing indicators, read receipts, and message persistence.
+                  Handles 100+ concurrent connections with minimal latency.
+                </p>
+                <div className="space-y-3">
+                  {[
+                    "Real-time bidirectional communication",
+                    "Markdown support for rich text formatting",
+                    "Drag-and-drop file uploads with preview",
+                    "End-to-end encryption for secure messaging",
+                  ].map((feature, i) => (
+                    <div key={i} className="flex gap-3 text-neutral-500">
+                      <span className="text-neutral-700 mt-1.5">•</span>
+                      <span className="text-sm leading-relaxed">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between mb-8 mt-24">
+              <div className="font-mono text-xs tracking-wider text-neutral-600">PROJECT 03</div>
+              <div className="relative w-10 h-10" aria-hidden="true">
+                <svg className="w-10 h-10 transform -rotate-90" viewBox="0 0 36 36">
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="text-neutral-800"
+                  />
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray="90 100"
+                    strokeLinecap="round"
+                    className="text-neutral-700 transition-all duration-1000 ease-out"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-[10px] font-mono text-neutral-700">90%</span>
+                </div>
+              </div>
+            </div>
+            <div className="grid md:grid-cols-12 gap-12">
+              <div className="md:col-span-5 space-y-8">
+                <h3 className="text-4xl md:text-5xl font-bold leading-tight group-hover:text-neutral-400 transition-colors duration-300">
+                  Distributed Task Engine
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Next.js", "PostgreSQL", "Redis", "WebSocket"].map((item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-sm text-xs font-mono text-neutral-400"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-3 pt-4">
+                  <a
+                    href="https://github.com/yourusername/task-engine"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+                  >
+                    <Code2 className="h-4 w-4" />
+                    Code
+                  </a>
+                  <a
+                    href="https://task-engine.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Demo
+                  </a>
+                </div>
+              </div>
+              <div className="md:col-span-7 space-y-8">
+                <p className="text-lg text-neutral-400 leading-relaxed">
+                  Task management system supporting 500+ concurrent users. Features offline-first architecture with
+                  intelligent conflict resolution for collaborative editing.
+                </p>
+                <div className="space-y-3">
+                  {[
+                    "Offline-first with local state sync",
+                    "Zero-latency updates across clients",
+                    "Intelligent conflict resolution",
+                    "Real-time collaborative workspaces",
+                  ].map((feature, i) => (
+                    <div key={i} className="flex gap-3 text-neutral-500">
+                      <span className="text-neutral-700 mt-1.5">•</span>
+                      <span className="text-sm leading-relaxed">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </FadeInSection>
         </div>
@@ -217,7 +402,7 @@ export default function Portfolio() {
       <section id="contact" className="relative py-32 px-6 border-t border-white/5">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="max-w-5xl mx-auto">
-          <FadeInSection>
+          <FadeInSection delay={800}>
             <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 -mr-16 text-right hidden md:block">
               04 / CONTACT
             </div>
@@ -277,7 +462,7 @@ export default function Portfolio() {
 
 // Design rationale: Using IO API is more performant than scroll events. Subtle 0.6s transition creates
 // gentle reveals without drawing attention away from content. Only animates once per element.
-function FadeInSection({ children }: { children: React.ReactNode }) {
+function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -288,8 +473,10 @@ function FadeInSection({ children }: { children: React.ReactNode }) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("opacity-100", "translate-y-0")
-            entry.target.classList.remove("opacity-0", "translate-y-6")
+            setTimeout(() => {
+              entry.target.classList.add("opacity-100", "translate-y-0")
+              entry.target.classList.remove("opacity-0", "translate-y-6")
+            }, delay)
           }
         })
       },
@@ -298,7 +485,7 @@ function FadeInSection({ children }: { children: React.ReactNode }) {
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [])
+  }, [delay])
 
   return (
     <div
@@ -328,67 +515,116 @@ function ProjectCard({
   codeUrl: string
   demoUrl: string
 }) {
+  // This is purely decorative - higher number = more mature/complete (01=95%, 02=80%, 03=90%)
+  const maturityMap: { [key: string]: number } = {
+    "01": 95,
+    "02": 80,
+    "03": 90,
+  }
+  const maturity = maturityMap[number] || 85
+
   return (
-    <article className="group border-b border-white/5 pb-24 last:border-0">
-      {/* Design rationale: Project number provides visual anchor. Large title creates hierarchy.
-          Two-column layout on desktop creates scannable sections with optimal line length. */}
-      <div className="font-mono text-xs tracking-wider text-neutral-600 mb-8">PROJECT {number}</div>
+    <FadeInSection>
+      <article className="group border-b border-white/5 pb-24 last:border-0">
+        {/* Design rationale: Project number provides visual anchor. Large title creates hierarchy.
+            Two-column layout on desktop creates scannable sections with optimal line length. */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="font-mono text-xs tracking-wider text-neutral-600">PROJECT {number}</div>
 
-      <div className="grid md:grid-cols-12 gap-12">
-        {/* Left column: Title, tech, and actions */}
-        <div className="md:col-span-5 space-y-8">
-          <h3 className="text-4xl md:text-5xl font-bold leading-tight group-hover:text-neutral-400 transition-colors duration-300">
-            {title}
-          </h3>
+          {/* Progress ring: decorative maturity indicator
+              Uses SVG circle with stroke-dasharray technique for clean, scalable visual
+              Low contrast (neutral-800/neutral-700) ensures non-distracting appearance
+              No interaction - purely informative visual accent */}
+          <div className="relative w-10 h-10" aria-hidden="true">
+            <svg className="w-10 h-10 transform -rotate-90" viewBox="0 0 36 36">
+              {/* Background ring - subtle baseline */}
+              <circle
+                cx="18"
+                cy="18"
+                r="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="text-neutral-800"
+              />
+              {/* Progress ring - animated fill based on maturity percentage
+                  stroke-dasharray creates the partial ring effect
+                  transition provides smooth animation on mount */}
+              <circle
+                cx="18"
+                cy="18"
+                r="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeDasharray={`${maturity} 100`}
+                strokeLinecap="round"
+                className="text-neutral-700 transition-all duration-1000 ease-out"
+              />
+            </svg>
+            {/* Center percentage label for clarity */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-[10px] font-mono text-neutral-700">{maturity}%</span>
+            </div>
+          </div>
+        </div>
 
-          <div className="flex flex-wrap gap-2">
-            {tech.map((item) => (
-              <span
-                key={item}
-                className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-sm text-xs font-mono text-neutral-400"
+        <div className="grid md:grid-cols-12 gap-12">
+          {/* Left column: Title, tech, and actions */}
+          <div className="md:col-span-5 space-y-8">
+            <h3 className="text-4xl md:text-5xl font-bold leading-tight group-hover:text-neutral-400 transition-colors duration-300">
+              {title}
+            </h3>
+
+            <div className="flex flex-wrap gap-2">
+              {tech.map((item) => (
+                <span
+                  key={item}
+                  className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-sm text-xs font-mono text-neutral-400"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex gap-3 pt-4">
+              <a
+                href={codeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
               >
-                {item}
-              </span>
-            ))}
+                <Code2 className="h-4 w-4" />
+                Code
+              </a>
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Demo
+              </a>
+            </div>
           </div>
 
-          <div className="flex gap-3 pt-4">
-            <a
-              href={codeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
-            >
-              <Code2 className="h-4 w-4" />
-              Code
-            </a>
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Demo
-            </a>
-          </div>
-        </div>
+          {/* Right column: Description and features */}
+          <div className="md:col-span-7 space-y-8">
+            <p className="text-lg text-neutral-400 leading-relaxed">{description}</p>
 
-        {/* Right column: Description and features */}
-        <div className="md:col-span-7 space-y-8">
-          <p className="text-lg text-neutral-400 leading-relaxed">{description}</p>
-
-          <div className="space-y-3">
-            {features.map((feature, i) => (
-              <div key={i} className="flex gap-3 text-neutral-500">
-                <span className="text-neutral-700 mt-1.5">•</span>
-                <span className="text-sm leading-relaxed">{feature}</span>
-              </div>
-            ))}
+            <div className="space-y-3">
+              {features.map((feature, i) => (
+                <div key={i} className="flex gap-3 text-neutral-500">
+                  <span className="text-neutral-700 mt-1.5">•</span>
+                  <span className="text-sm leading-relaxed">{feature}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </FadeInSection>
   )
 }
 
@@ -442,5 +678,78 @@ function TimelineItem({ section, scrollProgress }: { section: any; scrollProgres
         {section.label}
       </motion.div>
     </motion.div>
+  )
+}
+
+// Interactive Skills Map Component
+// Design: Spatial grid layout with hover-based highlighting
+// Interaction: Hovering one skill highlights it and dims others (CSS-based, no state)
+// Performance: Pure CSS transitions, no JavaScript hover handlers
+function SkillsMap() {
+  const skills = [
+    { name: "React", icon: "⚛️", category: "Frontend" },
+    { name: "TypeScript", icon: "📘", category: "Language" },
+    { name: "Next.js", icon: "▲", category: "Framework" },
+    { name: "Node.js", icon: "🟢", category: "Backend" },
+    { name: "Tailwind", icon: "🎨", category: "Styling" },
+    { name: "PostgreSQL", icon: "🐘", category: "Database" },
+    { name: "Git", icon: "🔱", category: "Tools" },
+    { name: "Framer", icon: "🎬", category: "Animation" },
+  ]
+
+  return (
+    <div className="skill-map-container group/map">
+      {/* Grid layout creates spatial relationships between skills
+          Gap provides breathing room, auto-fit ensures responsiveness */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        {skills.map((skill) => (
+          <div
+            key={skill.name}
+            className="skill-card relative p-6 md:p-8 border border-white/5 rounded-sm 
+                     transition-all duration-300 cursor-default
+                     hover:border-white/30 hover:bg-white/[0.02] hover:scale-105
+                     group-hover/map:opacity-40 hover:!opacity-100"
+          >
+            {/* Hover logic:
+                - All cards start at full opacity
+                - When ANY card is hovered (group-hover/map), all cards dim to 40% opacity
+                - The hovered card itself uses !opacity-100 to override the dim
+                - This creates the "highlight one, dim others" effect without JavaScript */}
+
+            {/* Icon grows on hover with slight rotation for playful effect */}
+            <div
+              className="text-4xl md:text-5xl mb-4 transition-transform duration-300 
+                          group-hover:scale-110 group-hover:rotate-3"
+            >
+              {skill.icon}
+            </div>
+
+            {/* Skill name and category with staggered color transitions */}
+            <div className="space-y-1">
+              <div
+                className="font-medium text-sm md:text-base text-neutral-300 
+                            group-hover:text-white transition-colors duration-300"
+              >
+                {skill.name}
+              </div>
+              <div
+                className="font-mono text-xs text-neutral-600 
+                            group-hover:text-neutral-500 transition-colors duration-300"
+              >
+                {skill.category}
+              </div>
+            </div>
+
+            {/* Subtle corner accent that appears on hover */}
+            <div
+              className="absolute top-0 right-0 w-0 h-0 
+                          group-hover:w-3 group-hover:h-3 
+                          border-t-2 border-r-2 border-white/30
+                          transition-all duration-300"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
