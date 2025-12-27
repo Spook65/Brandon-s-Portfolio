@@ -159,6 +159,11 @@
     }
   }
 
+  /* Added z-45 utility for system overlay layer */
+  .z-45 {
+    z-index: 45;
+  }
+
   /* Systems Mode styling - Applied when .systems-mode class is on root HTML element */
 
   /* Subtle engineering grid overlay (4x4px dots with 2% opacity) */

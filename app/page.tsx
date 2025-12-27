@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { Github, Linkedin, Mail, ExternalLink, Code2, X, Sparkles } from "lucide-react"
+import { Github, Linkedin, Mail, ExternalLink, Code2, X, Sparkles, Terminal } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
@@ -12,7 +12,12 @@ const TerminalTyping = () => {
   const [cursorVisible, setCursorVisible] = useState(true)
 
   // Typing loop: cycles through phrases, types character-by-character, pauses, then deletes
-  const phrases = ["Brandon Huynh", "Computer Science Major", "Cybersecurity Concentration"]
+  const phrases = [
+    "Hello World!",
+    "My name is Brandon Hann",
+    "I'm Majoring In Computer Science",
+    "And Concentrated In Cybersecurity",
+  ]
 
   useEffect(() => {
     const currentPhrase = phrases[currentIndex]
@@ -80,6 +85,13 @@ const TerminalTyping = () => {
   )
 }
 
+// SystemOverlayLayer: Dedicated container for system state indicators
+// Purpose: Sits between content (z-40) and navbar (z-50) at z-45
+// This ensures system indicators are always visible without conflicting with nav
+function SystemOverlayLayer({ children }: { children: React.ReactNode }) {
+  return <div className="fixed inset-0 z-45 pointer-events-none">{children}</div>
+}
+
 function SystemsModeToggle() {
   // Load Systems Mode preference from localStorage on mount
   const [systemsMode, setSystemsMode] = useState(false)
@@ -126,28 +138,27 @@ function SystemsModeToggle() {
 
   return (
     <>
-      {/* Optional UI toggle button (positioned in bottom-left corner) */}
+      {/* Systems Mode button integrated into navbar - see navbar component below */}
       <button
         onClick={toggleSystemsMode}
-        className="fixed bottom-8 left-8 z-40 px-4 py-2 bg-neutral-900/95 backdrop-blur-sm border border-white/10 rounded-sm text-xs font-mono text-neutral-400 hover:text-white hover:border-white/30 transition-all duration-300"
-        aria-label="Toggle Systems Mode"
+        className="px-3 py-1.5 bg-neutral-900/80 backdrop-blur-sm border border-white/10 rounded-sm text-xs font-mono text-neutral-400 hover:text-white hover:border-white/30 transition-all duration-300 flex items-center gap-2"
+        title="Toggle Systems Mode (Keyboard: S)"
       >
-        <span className="hidden md:inline">Press S / </span>
-        {systemsMode ? "Exit Systems" : "Systems Mode"}
+        <Terminal className="w-3 h-3" />
+        <span>SYS</span>
       </button>
 
-      {/* Status indicator that appears when Systems Mode is active */}
+      {/* Indicator now appears directly in navbar next to toggle button for visual cohesion */}
       {systemsMode && (
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-blue-500/10 backdrop-blur-sm border border-blue-500/30 rounded-sm pointer-events-none"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.2 }}
+          className="px-3 py-1.5 bg-blue-500/10 backdrop-blur-sm border border-blue-500/30 rounded-sm flex items-center gap-2"
         >
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-            <span className="text-xs font-mono text-blue-400 tracking-wider">SYSTEMS MODE: ACTIVE</span>
-          </div>
+          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+          <span className="text-xs font-mono text-blue-400 tracking-wider">ACTIVE</span>
         </motion.div>
       )}
     </>
@@ -318,7 +329,94 @@ function EasterEgg() {
   )
 }
 
+// Interactive System Log Component
+// Tracks section visibility using IntersectionObserver
+// Each section triggers a new log line when it enters viewport
+function SystemLog() {
+  const [logs, setLogs] = useState<string[]>([])
+  const [showLog, setShowLog] = useState(false)
+  const observersRef = useRef<IntersectionObserver[]>([])
+
+  useEffect(() => {
+    // Section-to-log mapping: when a section becomes visible, append its corresponding message
+    const sectionMessages: Record<string, string> = {
+      hero: "[sys] boot sequence complete",
+      about: "[sys] profile loaded",
+      stack: "[sys] modules initialized",
+      work: "[sys] processes running",
+      contact: "[sys] awaiting handshake",
+    }
+
+    // Track which sections have already been logged to prevent duplicates
+    const loggedSections = new Set<string>()
+
+    // Create an IntersectionObserver for each section
+    // When a section becomes visible (50% threshold), append its log message
+    Object.keys(sectionMessages).forEach((sectionId) => {
+      const element = document.getElementById(sectionId)
+      if (!element) return
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Only log when section enters viewport and hasn't been logged yet
+            if (entry.isIntersecting && !loggedSections.has(sectionId)) {
+              loggedSections.add(sectionId)
+
+              // Show log panel after hero section is visible
+              if (sectionId === "hero") {
+                setShowLog(true)
+              }
+
+              // Append new log line with smooth animation
+              setLogs((prev) => [...prev, sectionMessages[sectionId]])
+            }
+          })
+        },
+        {
+          threshold: 0.5, // Trigger when section is 50% visible
+        },
+      )
+
+      observer.observe(element)
+      observersRef.current.push(observer)
+    })
+
+    // Cleanup: disconnect all observers on unmount
+    return () => {
+      observersRef.current.forEach((observer) => observer.disconnect())
+    }
+  }, [])
+
+  // Don't render until hero section triggers visibility
+  if (!showLog) return null
+
+  return (
+    <div className="fixed bottom-6 left-6 z-40 pointer-events-none hidden md:block">
+      {/* Terminal-style log container with very low opacity */}
+      <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-sm p-4 font-mono text-[10px] text-neutral-500 space-y-1 max-w-[280px]">
+        <div className="text-neutral-600 mb-2 tracking-wider">SYSTEM_LOG</div>
+        {/* Each log line fades in smoothly using CSS animation */}
+        {logs.map((log, i) => (
+          <div
+            key={i}
+            className="animate-fadeIn opacity-0"
+            style={{
+              animation: "fadeIn 500ms ease-out forwards",
+              animationDelay: `${i * 100}ms`,
+            }}
+          >
+            {log}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Portfolio() {
+  const [systemsMode, setSystemsMode] = useState(false) // Added state for systemsMode
+
   // Uses Framer Motion's useScroll which is optimized and doesn't cause reflows
   const { scrollYProgress } = useScroll()
   const sections = [
@@ -338,6 +436,8 @@ export default function Portfolio() {
       <SystemsModeToggle />
 
       <EasterEgg />
+
+      <SystemLog />
 
       <div className="fixed inset-0 pointer-events-none">
         {/* Base gradient for depth */}
@@ -362,17 +462,29 @@ export default function Portfolio() {
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
           <div className="font-mono text-xs tracking-wider text-neutral-500">BRANDON H.</div>
-          <div className="flex gap-8 text-sm">
-            {["About", "Stack", "Work", "Contact"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-neutral-400 hover:text-white transition-colors duration-300 relative group"
-              >
-                {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
-              </a>
-            ))}
+          <div className="flex gap-8 items-center">
+            {/* Systems Mode controls now grouped together in navbar
+                Toggle button + Active indicator appear side-by-side for clear visual relationship
+                Benefits: 
+                - Intuitive placement - users expect controls in navigation
+                - Status indicator directly adjacent to its control
+                - Always visible during scroll
+                - Eliminates z-index conflicts from overlay layer */}
+            <div className="flex items-center gap-3">
+              <SystemsModeToggle />
+            </div>
+
+            <div className="flex gap-8 text-sm">
+              {["About", "Stack", "Work", "Contact"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-neutral-400 hover:text-white transition-colors duration-300 tracking-wide"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </nav>
@@ -948,6 +1060,79 @@ function ProjectCard({
   )
 }
 
+// Interactive Skills Map Component
+// Design: Spatial grid layout with hover-based highlighting
+// Interaction: Hovering one skill highlights it and dims others (CSS-based, no state)
+// Performance: Pure CSS transitions, no JavaScript hover handlers
+function SkillsMap() {
+  const skills = [
+    { name: "React", icon: "⚛️", category: "Frontend" },
+    { name: "TypeScript", icon: "📘", category: "Language" },
+    { name: "Next.js", icon: "▲", category: "Framework" },
+    { name: "Node.js", icon: "🟢", category: "Backend" },
+    { name: "Tailwind", icon: "🎨", category: "Styling" },
+    { name: "PostgreSQL", icon: "🐘", category: "Database" },
+    { name: "Git", icon: "🔱", category: "Tools" },
+    { name: "Framer", icon: "🎬", category: "Animation" },
+  ]
+
+  return (
+    <div className="skill-map-container group/map">
+      {/* Grid layout creates spatial relationships between skills
+          Gap provides breathing room, auto-fit ensures responsiveness */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        {skills.map((skill) => (
+          <div
+            key={skill.name}
+            className="skill-card relative p-6 md:p-8 border border-white/5 rounded-sm
+                     transition-all duration-300 cursor-default
+                     hover:border-white/30 hover:bg-white/[0.02] hover:scale-105
+                     group-hover/map:opacity-40 hover:!opacity-100"
+          >
+            {/* Hover logic:
+                - All cards start at full opacity
+                - When ANY card is hovered (group-hover/map), all cards dim to 40% opacity
+                - The hovered card itself uses !opacity-100 to override the dim
+                - This creates the "highlight one, dim others" effect without JavaScript */}
+
+            {/* Icon grows on hover with slight rotation for playful effect */}
+            <div
+              className="text-4xl md:text-5xl mb-4 transition-transform duration-300
+                          group-hover:scale-110 group-hover:rotate-3"
+            >
+              {skill.icon}
+            </div>
+
+            {/* Skill name and category with staggered color transitions */}
+            <div className="space-y-1">
+              <div
+                className="font-medium text-sm md:text-base text-neutral-300
+                            group-hover:text-white transition-colors duration-300"
+              >
+                {skill.name}
+              </div>
+              <div
+                className="font-mono text-xs text-neutral-600
+                            group-hover:text-neutral-500 transition-colors duration-300"
+              >
+                {skill.category}
+              </div>
+            </div>
+
+            {/* Subtle corner accent that appears on hover */}
+            <div
+              className="absolute top-0 right-0 w-0 h-0
+                          group-hover:w-3 group-hover:h-3
+                          border-t-2 border-r-2 border-white/30
+                          transition-all duration-300"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // Design: Minimal vertical line with labeled dots for each section
 // Performance: Uses Framer Motion's scroll hooks (GPU-accelerated, no heavy listeners)
 // Non-interfering: pointer-events-none, fixed positioning, doesn't block content
@@ -998,78 +1183,5 @@ function TimelineItem({ section, scrollProgress }: { section: any; scrollProgres
         {section.label}
       </motion.div>
     </motion.div>
-  )
-}
-
-// Interactive Skills Map Component
-// Design: Spatial grid layout with hover-based highlighting
-// Interaction: Hovering one skill highlights it and dims others (CSS-based, no state)
-// Performance: Pure CSS transitions, no JavaScript hover handlers
-function SkillsMap() {
-  const skills = [
-    { name: "React", icon: "⚛️", category: "Frontend" },
-    { name: "TypeScript", icon: "📘", category: "Language" },
-    { name: "Next.js", icon: "▲", category: "Framework" },
-    { name: "Node.js", icon: "🟢", category: "Backend" },
-    { name: "Tailwind", icon: "🎨", category: "Styling" },
-    { name: "PostgreSQL", icon: "🐘", category: "Database" },
-    { name: "Git", icon: "🔱", category: "Tools" },
-    { name: "Framer", icon: "🎬", category: "Animation" },
-  ]
-
-  return (
-    <div className="skill-map-container group/map">
-      {/* Grid layout creates spatial relationships between skills
-          Gap provides breathing room, auto-fit ensures responsiveness */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-        {skills.map((skill) => (
-          <div
-            key={skill.name}
-            className="skill-card relative p-6 md:p-8 border border-white/5 rounded-sm 
-                     transition-all duration-300 cursor-default
-                     hover:border-white/30 hover:bg-white/[0.02] hover:scale-105
-                     group-hover/map:opacity-40 hover:!opacity-100"
-          >
-            {/* Hover logic:
-                - All cards start at full opacity
-                - When ANY card is hovered (group-hover/map), all cards dim to 40% opacity
-                - The hovered card itself uses !opacity-100 to override the dim
-                - This creates the "highlight one, dim others" effect without JavaScript */}
-
-            {/* Icon grows on hover with slight rotation for playful effect */}
-            <div
-              className="text-4xl md:text-5xl mb-4 transition-transform duration-300 
-                          group-hover:scale-110 group-hover:rotate-3"
-            >
-              {skill.icon}
-            </div>
-
-            {/* Skill name and category with staggered color transitions */}
-            <div className="space-y-1">
-              <div
-                className="font-medium text-sm md:text-base text-neutral-300 
-                            group-hover:text-white transition-colors duration-300"
-              >
-                {skill.name}
-              </div>
-              <div
-                className="font-mono text-xs text-neutral-600 
-                            group-hover:text-neutral-500 transition-colors duration-300"
-              >
-                {skill.category}
-              </div>
-            </div>
-
-            {/* Subtle corner accent that appears on hover */}
-            <div
-              className="absolute top-0 right-0 w-0 h-0 
-                          group-hover:w-3 group-hover:h-3 
-                          border-t-2 border-r-2 border-white/30
-                          transition-all duration-300"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
   )
 }
