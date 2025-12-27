@@ -5,6 +5,80 @@ import { Github, Linkedin, Mail, ExternalLink, Code2, X, Sparkles } from "lucide
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
+function SystemsModeToggle() {
+  // Load Systems Mode preference from localStorage on mount
+  const [systemsMode, setSystemsMode] = useState(false)
+
+  useEffect(() => {
+    // Check if user has Systems Mode enabled from previous session
+    const savedMode = localStorage.getItem("systems-mode") === "true"
+    setSystemsMode(savedMode)
+
+    // Apply .systems-mode class to root HTML element for CSS-based styling
+    if (savedMode) {
+      document.documentElement.classList.add("systems-mode")
+    }
+
+    // Keyboard shortcut: Press 'S' to toggle Systems Mode
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Only trigger if not typing in an input field
+      if (e.key === "s" && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) {
+        e.preventDefault()
+        toggleSystemsMode()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyPress)
+    return () => window.removeEventListener("keydown", handleKeyPress)
+  }, [])
+
+  // Toggle function that updates state, localStorage, and root CSS class
+  const toggleSystemsMode = () => {
+    setSystemsMode((prev) => {
+      const newMode = !prev
+      localStorage.setItem("systems-mode", String(newMode))
+
+      // Apply or remove CSS class from root element
+      if (newMode) {
+        document.documentElement.classList.add("systems-mode")
+      } else {
+        document.documentElement.classList.remove("systems-mode")
+      }
+
+      return newMode
+    })
+  }
+
+  return (
+    <>
+      {/* Optional UI toggle button (positioned in bottom-left corner) */}
+      <button
+        onClick={toggleSystemsMode}
+        className="fixed bottom-8 left-8 z-40 px-4 py-2 bg-neutral-900/95 backdrop-blur-sm border border-white/10 rounded-sm text-xs font-mono text-neutral-400 hover:text-white hover:border-white/30 transition-all duration-300"
+        aria-label="Toggle Systems Mode"
+      >
+        <span className="hidden md:inline">Press S / </span>
+        {systemsMode ? "Exit Systems" : "Systems Mode"}
+      </button>
+
+      {/* Status indicator that appears when Systems Mode is active */}
+      {systemsMode && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-blue-500/10 backdrop-blur-sm border border-blue-500/30 rounded-sm pointer-events-none"
+        >
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+            <span className="text-xs font-mono text-blue-400 tracking-wider">SYSTEMS MODE: ACTIVE</span>
+          </div>
+        </motion.div>
+      )}
+    </>
+  )
+}
+
 function AssistantHint() {
   const [visible, setVisible] = useState(false)
   const [dismissed, setDismissed] = useState(false)
@@ -95,6 +169,8 @@ export default function Portfolio() {
       <ScrollTimeline scrollProgress={scrollYProgress} sections={sections} />
 
       <AssistantHint />
+
+      <SystemsModeToggle />
 
       <div className="fixed inset-0 pointer-events-none">
         {/* Base gradient for depth */}

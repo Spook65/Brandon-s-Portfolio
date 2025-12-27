@@ -158,4 +158,46 @@
       transform: translateY(0);
     }
   }
+
+  /* Systems Mode styling - Applied when .systems-mode class is on root HTML element */
+
+  /* Subtle engineering grid overlay (4x4px dots with 2% opacity) */
+  .systems-mode::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Replace section labels with system-style labels */
+  .systems-mode [data-section-label]::before {
+    content: "SYS_" attr(data-section-label) " //";
+    font-family: ui-monospace, monospace;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  /* Enhance timeline/progress indicator visibility */
+  .systems-mode [data-timeline] {
+    opacity: 1 !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+  }
+
+  .systems-mode [data-timeline-dot] {
+    background-color: rgba(59, 130, 246, 0.5) !important;
+    border-color: rgba(59, 130, 246, 0.7) !important;
+  }
+
+  /* Slightly enhance existing guide lines */
+  .systems-mode .fixed.w-px {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  /* Subtle enhancement to progress rings */
+  .systems-mode [data-progress-ring] {
+    opacity: 0.8 !important;
+  }
 }
