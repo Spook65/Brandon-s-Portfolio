@@ -1,10 +1,83 @@
 "use client"
 
 import type React from "react"
-
-import { Github, Linkedin, Mail, ExternalLink, Code2 } from "lucide-react"
-import { useEffect, useRef } from "react"
+import { Github, Linkedin, Mail, ExternalLink, Code2, X, Sparkles } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+
+function AssistantHint() {
+  const [visible, setVisible] = useState(false)
+  const [dismissed, setDismissed] = useState(false)
+
+  useEffect(() => {
+    // Check if user has permanently dismissed the assistant
+    const isDismissed = localStorage.getItem("assistant-dismissed") === "true"
+    if (isDismissed) {
+      setDismissed(true)
+      return
+    }
+
+    // Performance-safe scroll detection using passive listener
+    const handleScroll = () => {
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+
+      // Show assistant after 30% scroll
+      if (scrollPercent > 30 && !visible) {
+        setVisible(true)
+        // Remove listener after showing to avoid unnecessary checks
+        window.removeEventListener("scroll", handleScroll)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [visible])
+
+  const handleDismiss = () => {
+    setVisible(false)
+    setDismissed(true)
+    // Remember dismissal permanently
+    localStorage.setItem("assistant-dismissed", "true")
+  }
+
+  if (dismissed || !visible) return null
+
+  // Friendly suggestions that guide user through portfolio
+  const suggestions = ["View React projects →", "Check out my tech stack", "See real-time chat demo"]
+  const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)]
+
+  return (
+    // Positioned bottom-right, won't block content due to z-40 and careful placement
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="fixed bottom-8 right-8 z-40 max-w-xs pointer-events-auto"
+    >
+      <div className="bg-neutral-900/95 backdrop-blur-sm border border-white/10 rounded-lg p-4 shadow-2xl">
+        {/* Dismissible button in top-right corner */}
+        <button
+          onClick={handleDismiss}
+          className="absolute -top-2 -right-2 w-6 h-6 bg-neutral-800 border border-white/10 rounded-full flex items-center justify-center hover:bg-neutral-700 transition-colors duration-200"
+          aria-label="Dismiss assistant"
+        >
+          <X className="w-3 h-3 text-neutral-400" />
+        </button>
+
+        {/* Minimal, friendly icon */}
+        <div className="flex items-start gap-3">
+          <div className="w-8 h-8 bg-blue-500/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <Sparkles className="w-4 h-4 text-blue-400" />
+          </div>
+          <div className="flex-1">
+            <p className="text-sm text-neutral-300 leading-relaxed">{randomSuggestion}</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function Portfolio() {
   // Uses Framer Motion's useScroll which is optimized and doesn't cause reflows
@@ -20,6 +93,8 @@ export default function Portfolio() {
   return (
     <main className="bg-neutral-950 text-white min-h-screen">
       <ScrollTimeline scrollProgress={scrollYProgress} sections={sections} />
+
+      <AssistantHint />
 
       <div className="fixed inset-0 pointer-events-none">
         {/* Base gradient for depth */}
