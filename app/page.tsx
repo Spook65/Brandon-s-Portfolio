@@ -752,19 +752,61 @@ export default function Portfolio() {
             <div className="grid md:grid-cols-12 gap-16">
               <div className="md:col-span-5">
                 <h2 className="text-5xl md:text-6xl font-bold leading-tight mb-8">
-                  Who I am &<br />
-                  what I do
+                  System
+                  <br />
+                  Overview
                 </h2>
               </div>
-              <div className="md:col-span-7 space-y-6 text-lg text-neutral-400 leading-relaxed">
-                <p>
-                  I'm a computer science student building full-stack applications with a focus on clean architecture and
-                  developer experience. My work centers on scalable systems that solve real problems.
-                </p>
-                <p>
-                  Currently seeking Summer 2025 internships in full-stack engineering, cloud infrastructure, or
-                  developer tooling. I'm drawn to teams that prioritize craft and impact.
-                </p>
+              <div className="md:col-span-7 space-y-8">
+                {/* Purpose statement */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">PURPOSE</h3>
+                  <p className="text-lg text-neutral-300 leading-relaxed">
+                    Build full-stack systems that solve real problems. Focus on correctness, clarity, and
+                    maintainability.
+                  </p>
+                </div>
+
+                {/* Design principles */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">DESIGN PRINCIPLES</h3>
+                  <ul className="space-y-2 text-neutral-400">
+                    <li className="flex items-start gap-3">
+                      <span className="text-neutral-600 mt-1">—</span>
+                      <span>Start with the data model. Everything else follows.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-neutral-600 mt-1">—</span>
+                      <span>Optimize for readability. Code is read more than written.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-neutral-600 mt-1">—</span>
+                      <span>Ship early. Iterate based on real usage.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-neutral-600 mt-1">—</span>
+                      <span>Test what matters. Not everything needs 100% coverage.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Current focus */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">CURRENT FOCUS</h3>
+                  <p className="text-neutral-400 leading-relaxed">
+                    Real-time systems. WebSocket architecture. State synchronization across distributed clients.
+                    Exploring consistency models and conflict resolution patterns.
+                  </p>
+                </div>
+
+                {/* System constraints / Status */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">STATUS</h3>
+                  <p className="text-neutral-400 leading-relaxed">
+                    Seeking Summer 2025 internships. Open to full-stack engineering, cloud infrastructure, or developer
+                    tooling roles. Interested in teams that value craft and impact over growth metrics.
+                  </p>
+                </div>
               </div>
             </div>
           </FadeInSection>
@@ -1006,7 +1048,7 @@ export default function Portfolio() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="max-w-5xl mx-auto">
           <FadeInSection delay={800}>
-            <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 -mr-16 text-right hidden md:block">
+            <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 -mr-16 hidden md:block">
               05 / CONTACT
             </div>
             <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 md:hidden">05 / CONTACT</div>
