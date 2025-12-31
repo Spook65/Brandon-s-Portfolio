@@ -17,6 +17,7 @@ import {
   FileText,
   Code,
   Shield,
+  CheckCircle2,
 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
@@ -506,6 +507,7 @@ function SystemLog() {
       hero: "[sys] boot sequence complete",
       about: "[sys] profile loaded",
       timeline: "[sys] build log initialized", // Updated log message for timeline
+      principles: "[sys] core tenets verified", // Added log message for principles
       stack: "[sys] modules initialized",
       work: "[sys] processes running",
       contact: "[sys] awaiting handshake",
@@ -674,9 +676,10 @@ export default function Portfolio() {
     { id: "hero", label: "Home", range: [0, 0.16] },
     { id: "about", label: "About", range: [0.16, 0.32] },
     { id: "timeline", label: "Timeline", range: [0.32, 0.48] }, // Updated range for timeline
-    { id: "stack", label: "Stack", range: [0.48, 0.64] },
-    { id: "work", label: "Work", range: [0.64, 0.82] },
-    { id: "contact", label: "Contact", range: [0.82, 1.0] },
+    { id: "principles", label: "Principles", range: [0.48, 0.64] }, // New section added here
+    { id: "stack", label: "Stack", range: [0.64, 0.82] },
+    { id: "work", label: "Work", range: [0.82, 1.0] }, // Adjusted range for work section
+    { id: "contact", label: "Contact", range: [1.0, 1.0] }, // Adjusted range for contact section
   ]
 
   return (
@@ -731,7 +734,7 @@ export default function Portfolio() {
 
             <div className="flex gap-8 text-sm">
               {/* Navigation links updated to include "Timeline" */}
-              {["About", "Timeline", "Stack", "Work", "Contact"].map((item) => (
+              {["About", "Timeline", "Principles", "Stack", "Work", "Contact"].map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -792,6 +795,7 @@ export default function Portfolio() {
         <TerminalTyping />
       </section>
 
+      {/* ==================== ABOUT SECTION ==================== */}
       <section id="about" className="relative py-32 px-6">
         <div className="max-w-5xl mx-auto">
           <FadeInSection delay={200}>
@@ -802,59 +806,76 @@ export default function Portfolio() {
             <div className="grid md:grid-cols-12 gap-16">
               <div className="md:col-span-5">
                 <h2 className="text-5xl md:text-6xl font-bold leading-tight mb-8">
-                  System
+                  About
                   <br />
-                  Overview
+                  My Work
                 </h2>
               </div>
               <div className="md:col-span-7 space-y-8">
-                {/* Purpose statement */}
+                {/* Background statement */}
                 <div>
-                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">PURPOSE</h3>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">BACKGROUND</h3>
                   <p className="text-lg text-neutral-300 leading-relaxed">
-                    Build full-stack systems that solve real problems. Focus on correctness, clarity, and
-                    maintainability.
+                    I'm a third-year Computer Science student with a concentration in cybersecurity. My focus is on
+                    building complete systems rather than isolated features — from frontend interfaces to backend APIs
+                    to system-level logic.
                   </p>
                 </div>
 
-                {/* Design principles */}
+                {/* Approach */}
                 <div>
-                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">DESIGN PRINCIPLES</h3>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">APPROACH</h3>
+                  <p className="text-neutral-400 leading-relaxed mb-4">
+                    I've developed projects ranging from local-first applications and interactive dashboards to
+                    graphical games and AI-assisted tools. Many run in controlled local environments intentionally —
+                    reflecting real-world constraints like API dependencies, security considerations, and development
+                    realism.
+                  </p>
+                  <p className="text-neutral-400 leading-relaxed">
+                    My work emphasizes clarity, modularity, and realistic constraints. I focus on systems that are
+                    maintainable, testable, and adaptable — whether deployed publicly or designed for local execution.
+                  </p>
+                </div>
+
+                {/* System philosophy */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">SYSTEM PHILOSOPHY</h3>
                   <ul className="space-y-2 text-neutral-400">
                     <li className="flex items-start gap-3">
                       <span className="text-neutral-600 mt-1">—</span>
-                      <span>Start with the data model. Everything else follows.</span>
+                      <span>Clean component boundaries and explicit state flow</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-neutral-600 mt-1">—</span>
-                      <span>Optimize for readability. Code is read more than written.</span>
+                      <span>Security-aware design decisions from the start</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-neutral-600 mt-1">—</span>
-                      <span>Ship early. Iterate based on real usage.</span>
+                      <span>Performance-conscious UI interactions</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-neutral-600 mt-1">—</span>
-                      <span>Test what matters. Not everything needs 100% coverage.</span>
+                      <span>Developer-friendly setup and documentation</span>
                     </li>
                   </ul>
                 </div>
 
-                {/* Current focus */}
+                {/* Leadership & collaboration */}
                 <div>
-                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">CURRENT FOCUS</h3>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">BEYOND CODE</h3>
                   <p className="text-neutral-400 leading-relaxed">
-                    Real-time systems. WebSocket architecture. State synchronization across distributed clients.
-                    Exploring consistency models and conflict resolution patterns.
+                    Leadership roles in Alpha Phi Omega strengthened my ability to plan, coordinate, and execute complex
+                    initiatives — skills I apply directly to software projects and team-based development. As a
+                    first-generation college student, I'm driven by continuous growth and intentional learning.
                   </p>
                 </div>
 
-                {/* System constraints / Status */}
+                {/* Status */}
                 <div>
                   <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">STATUS</h3>
                   <p className="text-neutral-400 leading-relaxed">
-                    Seeking Summer 2025 internships. Open to full-stack engineering, cloud infrastructure, or developer
-                    tooling roles. Interested in teams that value craft and impact over growth metrics.
+                    Actively seeking Summer 2025 internships in cybersecurity, software engineering, or systems
+                    development. Open to roles involving security tooling, backend systems, or full-stack applications.
                   </p>
                 </div>
               </div>
@@ -883,7 +904,6 @@ export default function Portfolio() {
 
                 {/* Timeline entries - Each animates in when entering viewport */}
                 <div className="space-y-16 md:pl-12">
-                  {/* Entry 1 */}
                   <FadeInSection delay={100}>
                     <div className="relative group">
                       {/* Timeline dot indicator */}
@@ -896,18 +916,17 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">First Production Deploy</h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">First Complete Full-Stack Project</h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Shipped my first full-stack application with Next.js, learning CI/CD and monitoring in
-                            production.
+                            Built Mapetite, a restaurant discovery platform with React/TypeScript, integrating external
+                            APIs and implementing client-side state management patterns.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Q1 2024</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Spring 2024</span>
                         </div>
                       </div>
                     </div>
                   </FadeInSection>
 
-                  {/* Entry 2 */}
                   <FadeInSection delay={200}>
                     <div className="relative group">
                       <div className="absolute -left-12 top-2 w-3 h-3 rounded-full bg-white/20 border-2 border-neutral-900 group-hover:bg-white/40 transition-colors duration-300 hidden md:block" />
@@ -918,18 +937,19 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">Database Architecture Deep Dive</h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">
+                            Exploring Game Architecture & State
+                          </h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Designed schema for real-time collaborative features, implemented optimistic updates and
-                            conflict resolution.
+                            Developed Hide Yo Stuff in Java/LibGDX, implementing inventory systems, collision detection,
+                            and game loop patterns for 2D exploration mechanics.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Q2 2024</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Summer 2024</span>
                         </div>
                       </div>
                     </div>
                   </FadeInSection>
 
-                  {/* Entry 3 */}
                   <FadeInSection delay={300}>
                     <div className="relative group">
                       <div className="absolute -left-12 top-2 w-3 h-3 rounded-full bg-white/20 border-2 border-neutral-900 group-hover:bg-white/40 transition-colors duration-300 hidden md:block" />
@@ -940,18 +960,17 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">Performance Optimization Sprint</h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">Cybersecurity Fundamentals</h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Reduced load times by 60% through code splitting, lazy loading, and implementing streaming
-                            SSR patterns.
+                            Deepened understanding of secure coding practices, access control mechanisms, and network
+                            security principles through coursework and independent study.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Q3 2024</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Fall 2024</span>
                         </div>
                       </div>
                     </div>
                   </FadeInSection>
 
-                  {/* Entry 4 */}
                   <FadeInSection delay={400}>
                     <div className="relative group">
                       <div className="absolute -left-12 top-2 w-3 h-3 rounded-full bg-white/20 border-2 border-neutral-900 group-hover:bg-white/40 transition-colors duration-300 hidden md:block" />
@@ -962,18 +981,17 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">Open Source Contributions</h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">Leadership & Coordination Skills</h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Contributing to developer tools and frameworks, focusing on DX improvements and
-                            documentation.
+                            Held leadership roles in Alpha Phi Omega, managing logistics, event coordination, and team
+                            communication—skills that translate directly to technical project management.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Q4 2024</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">2023-2024</span>
                         </div>
                       </div>
                     </div>
                   </FadeInSection>
 
-                  {/* Entry 5 */}
                   <FadeInSection delay={500}>
                     <div className="relative group">
                       <div className="absolute -left-12 top-2 w-3 h-3 rounded-full bg-white/20 border-2 border-neutral-900 group-hover:bg-white/40 transition-colors duration-300 hidden md:block" />
@@ -984,16 +1002,127 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">Building for Scale</h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">
+                            AI-Assisted Development & Systems Thinking
+                          </h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Currently working on distributed systems handling 500+ concurrent users with WebSocket sync
-                            and Redis caching.
+                            Experimenting with AI-assisted tooling, building local-first applications, and exploring
+                            system architecture patterns for scalable, maintainable software design.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Q1 2025</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Spring 2025</span>
                         </div>
                       </div>
                     </div>
                   </FadeInSection>
+                </div>
+              </div>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      {/* ==================== ENGINEERING PRINCIPLES SECTION ==================== */}
+      <section id="principles" className="relative py-32 px-6 border-t border-white/5">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/10 via-transparent to-transparent" />
+        <div className="max-w-5xl mx-auto">
+          <FadeInSection delay={200}>
+            <div className="font-mono text-xs tracking-wider text-neutral-600 mb-12 text-right -mr-16 hidden md:block">
+              02.5 / ENGINEERING PRINCIPLES
+            </div>
+            <div className="font-mono text-xs tracking-wider text-neutral-600 mb-12 md:hidden">
+              02.5 / ENGINEERING PRINCIPLES
+            </div>
+
+            <div className="grid md:grid-cols-12 gap-16">
+              <div className="md:col-span-5">
+                <h2 className="text-5xl md:text-6xl font-bold leading-tight mb-8">
+                  System
+                  <br />
+                  Philosophy
+                </h2>
+                <p className="text-neutral-500 text-sm leading-relaxed">
+                  Principles I apply across all projects, from local tools to deployed applications.
+                </p>
+              </div>
+
+              <div className="md:col-span-7 space-y-12">
+                {/* Architecture & Modularity */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-400 mb-4 flex items-center gap-2">
+                    <Code2 className="w-4 h-4" />
+                    ARCHITECTURE & MODULARITY
+                  </h3>
+                  <p className="text-neutral-300 leading-relaxed mb-3">
+                    I structure projects with clean component boundaries and explicit data flow. Each module has a
+                    single responsibility, making systems easier to test, debug, and extend.
+                  </p>
+                  <p className="text-neutral-500 text-sm leading-relaxed">
+                    This approach means features can evolve independently without cascading breaks across the codebase.
+                  </p>
+                </div>
+
+                {/* Security-Aware Design */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-400 mb-4 flex items-center gap-2">
+                    <Shield className="w-4 h-4" />
+                    SECURITY-AWARE DESIGN
+                  </h3>
+                  <p className="text-neutral-300 leading-relaxed mb-3">
+                    Security isn't an afterthought. I design with input validation, safe state management, and proper
+                    error handling from the start. Local-first projects allow me to experiment with authentication,
+                    authorization, and secure API patterns without premature deployment risk.
+                  </p>
+                  <p className="text-neutral-500 text-sm leading-relaxed">
+                    Real security comes from understanding threat models and building defensively at every layer.
+                  </p>
+                </div>
+
+                {/* Performance-Conscious UI */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-400 mb-4 flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    PERFORMANCE-CONSCIOUS UI
+                  </h3>
+                  <p className="text-neutral-300 leading-relaxed mb-3">
+                    Interfaces should feel immediate. I prioritize minimal re-renders, efficient state updates, and
+                    deliberate use of animation. CSS-based transitions and GPU-accelerated transforms ensure smooth
+                    interactions without JavaScript overhead.
+                  </p>
+                  <p className="text-neutral-500 text-sm leading-relaxed">
+                    Performance budget matters — every component choice affects the user experience.
+                  </p>
+                </div>
+
+                {/* Developer Experience */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-400 mb-4 flex items-center gap-2">
+                    <Terminal className="w-4 h-4" />
+                    DEVELOPER-FRIENDLY WORKFLOWS
+                  </h3>
+                  <p className="text-neutral-300 leading-relaxed mb-3">
+                    Code should be approachable for the next person — or future me. I write clear READMEs, use
+                    consistent naming conventions, and document non-obvious decisions inline. Setup instructions are
+                    explicit, and environment dependencies are tracked.
+                  </p>
+                  <p className="text-neutral-500 text-sm leading-relaxed">
+                    Good documentation isn't extra work — it's part of shipping maintainable software.
+                  </p>
+                </div>
+
+                {/* Realistic Constraints */}
+                <div>
+                  <h3 className="font-mono text-xs tracking-wider text-neutral-400 mb-4 flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    REALISTIC CONSTRAINTS
+                  </h3>
+                  <p className="text-neutral-300 leading-relaxed mb-3">
+                    Not every project needs to be deployed. Many of my systems run locally by design — they simulate
+                    real-world API dependencies, handle sensitive data securely, or require specific hardware. This
+                    reflects how software is actually built: incrementally, with realistic tradeoffs.
+                  </p>
+                  <p className="text-neutral-500 text-sm leading-relaxed">
+                    Understanding constraints is as important as writing code.
+                  </p>
                 </div>
               </div>
             </div>
@@ -1006,7 +1135,7 @@ export default function Portfolio() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/10 via-transparent to-transparent" />
         <div className="max-w-5xl mx-auto">
           <FadeInSection delay={400}>
-            <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 -mr-16 text-right hidden md:block">
+            <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 -mr-16 hidden md:block">
               03 / STACK
             </div>
             <div className="font-mono text-xs tracking-wider text-neutral-600 mb-6 md:hidden">03 / STACK</div>
@@ -1109,7 +1238,7 @@ export default function Portfolio() {
             </h2>
 
             <p className="text-xl text-neutral-400 mb-16 max-w-2xl leading-relaxed">
-              Open to Summer 2025 internships in full-stack engineering, cloud infrastructure, or developer tooling.
+              Open to Summer 2025 internships in full-stack engineering, cloud infrastructure, or systems development.
             </p>
 
             {/* Design rationale: Primary action uses high contrast (white bg) while secondary actions
