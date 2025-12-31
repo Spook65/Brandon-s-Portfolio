@@ -581,6 +581,7 @@ function SystemLog() {
 // System Status Component - displays minimal status indicator that reacts to user interaction
 function SystemStatus() {
   const [status, setStatus] = React.useState<"ready" | "active">("ready")
+  const [showDetail, setShowDetail] = React.useState(false)
 
   React.useEffect(() => {
     // Update status to 'active' when user scrolls or interacts with the page
@@ -599,7 +600,11 @@ function SystemStatus() {
   }, [])
 
   return (
-    <div className="font-mono text-xs text-neutral-600 flex items-center gap-2">
+    <div
+      className="font-mono text-xs text-neutral-600 flex items-center gap-2 cursor-default"
+      onMouseEnter={() => setShowDetail(true)}
+      onMouseLeave={() => setShowDetail(false)}
+    >
       <span className="text-neutral-700">[sys]</span>
       {status === "ready" ? (
         <span className="flex items-center gap-2">
@@ -608,6 +613,11 @@ function SystemStatus() {
       ) : (
         <span className="flex items-center gap-2">
           active <span className="inline-block w-1 h-1 rounded-full bg-green-600" /> session established
+          {showDetail && (
+            <span className="ml-2 text-neutral-700 animate-fadeIn">
+              · uptime {Math.floor((Date.now() - performance.timeOrigin) / 1000)}s
+            </span>
+          )}
         </span>
       )}
     </div>
@@ -711,25 +721,25 @@ export default function Portfolio() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-neutral-400 max-w-3xl leading-[1.7] mb-12">
-              Full-stack engineer building real-time systems with focus on correctness, performance, and developer
-              experience. Open to Summer 2025 internships.
+              Full-stack engineer building real-time systems, cloud infrastructure, and developer tooling. Seeking
+              Summer 2025 internships with teams building systems that matter.
             </p>
             <div className="flex gap-4 mb-8">
               <a
-                href="#contact"
+                href="#work"
                 className="group px-8 py-4 bg-white text-black font-medium rounded-sm hover:bg-neutral-200 transition-all duration-300 hover:translate-y-[-2px]"
               >
-                Get in touch
+                View work
                 {/* Arrow slides right on hover for clear affordance */}
                 <span className="inline-block ml-2 translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
                   →
                 </span>
               </a>
               <a
-                href="#work"
+                href="#contact"
                 className="group px-8 py-4 border border-white/10 text-white font-medium rounded-sm hover:border-white/30 transition-all duration-300 hover:translate-y-[-2px]"
               >
-                View work
+                Get in touch
                 <span className="inline-block ml-2 translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
                   →
                 </span>
