@@ -1536,9 +1536,9 @@ function ProjectCard({
 
   // Maturity indicator logic
   const maturityMap: { [key: string]: number } = {
-    "01": 95,
-    "02": 80,
-    "03": 90,
+    "01": 80,
+    "02": 100,
+    "03": 100,
   }
   const maturity = maturityMap[number] || 85
 
