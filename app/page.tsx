@@ -1076,14 +1076,14 @@ export default function Portfolio() {
                 use subtle borders. Consistent 16px gap creates visual rhythm. */}
             <div className="flex flex-wrap gap-4">
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:brandon.hann65@gmail.com"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-sm hover:bg-neutral-200 transition-colors duration-300"
               >
                 <Mail className="h-5 w-5" />
                 Email me
               </a>
               <a
-                href="https://linkedin.com/in/yourprofile"
+                href="https://www.linkedin.com/in/bhanncs/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 border border-white/10 text-white font-medium rounded-sm hover:border-white/30 transition-colors duration-300"
@@ -1092,7 +1092,7 @@ export default function Portfolio() {
                 LinkedIn
               </a>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/Spook65"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 border border-white/10 text-white font-medium rounded-sm hover:border-white/30 transition-colors duration-300"
