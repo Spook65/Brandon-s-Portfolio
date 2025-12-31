@@ -624,6 +624,44 @@ function SystemStatus() {
   )
 }
 
+/* CHANGE: RotatingTaglines component updated for more specific focus areas */
+function RotatingTaglines() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  // Rotating taglines showcasing focus areas without overclaiming
+  const taglines = [
+    "Currently exploring: threat modeling & secure architecture",
+    "Building: local-first applications with realistic constraints",
+    "Interested in: AI-assisted development tooling",
+    "Focused on: clean component boundaries & explicit state flow",
+    "Learning: cloud infrastructure & deployment patterns",
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % taglines.length)
+    }, 4000) // Rotate every 4 seconds
+    return () => clearInterval(interval)
+  }, [taglines.length])
+
+  return (
+    <div className="h-8 mb-8 overflow-hidden">
+      <p
+        className="font-mono text-sm text-neutral-500 transition-all duration-500"
+        style={{
+          transform: `translateY(-${currentIndex * 32}px)`,
+        }}
+      >
+        {taglines.map((tagline, index) => (
+          <span key={index} className="block h-8 leading-8">
+            {tagline}
+          </span>
+        ))}
+      </p>
+    </div>
+  )
+}
+
 export default function Portfolio() {
   // Added state for systemsMode, inspectionCount, and lastInspectionTime
   const [systemsMode, setSystemsMode] = useState(false)
@@ -711,19 +749,21 @@ export default function Portfolio() {
         <FadeInSection delay={0}>
           <div className="max-w-5xl w-full pt-20">
             <h1 className="text-[clamp(3rem,8vw,7rem)] font-bold leading-[0.95] tracking-tight mb-8">
-              Building systems
+              Designing secure,
               <br />
-              that{" "}
+              intelligent{" "}
               <span className="group/ship relative text-neutral-500 italic font-light inline-block cursor-default">
-                ship
+                systems
                 {/* Subtle underline appears on hover for intentional emphasis */}
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-neutral-400 scale-x-0 group-hover/ship:scale-x-100 transition-transform duration-300 origin-left" />
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-neutral-400 max-w-3xl leading-[1.7] mb-12">
-              Full-stack engineer building real-time systems, cloud infrastructure, and developer tooling. Seeking
-              Summer 2025 internships with teams building systems that matter.
+            <p className="text-xl md:text-2xl text-neutral-400 max-w-3xl leading-[1.7] mb-6">
+              Computer Science student focused on cybersecurity, AI-assisted tooling, and system-level software.
+              Building complete systems that balance security, performance, and usability.
             </p>
+            {/* RotatingTaglines component is now here */}
+            <RotatingTaglines />
             <div className="flex gap-4 mb-8">
               <a
                 href="#work"
@@ -981,73 +1021,73 @@ export default function Portfolio() {
           <FadeInSection delay={600}>
             <ProjectCard
               number="01"
-              title="E-commerce Dashboard"
-              description="Admin panel for inventory management, analytics, and order processing. Built with React Server Components and streaming patterns for optimal performance."
-              tech={["Next.js 15", "TypeScript", "Prisma", "Recharts"]}
+              title="Mapetite"
+              description="Premium restaurant discovery platform with global search, detailed filtering, and location-based recommendations. Built to handle complex search queries while maintaining a high-end user experience."
+              tech={["React", "TypeScript", "Vite", "Shadcn UI"]}
               features={[
-                "Interactive data visualizations with real-time updates",
-                "CSV import with validation and error handling",
-                "Role-based access control for team collaboration",
-                "Optimistic UI updates for instant feedback",
+                "Global restaurant search with multi-criteria filtering",
+                "Location-based discovery with map integration",
+                "Sophisticated, high-contrast UI for premium brand aesthetic",
+                "Type-safe architecture with comprehensive validation",
               ]}
-              codeUrl="https://github.com/yourusername/ecommerce-dashboard"
-              demoUrl="https://ecommerce-dashboard.vercel.app"
+              codeUrl="https://github.com/Spook65/Mapetite"
+              demoUrl="https://github.com/Spook65/Mapetite"
               moduleData={{
                 status: "production",
                 problem:
-                  "E-commerce teams need real-time visibility into inventory and orders across multiple warehouses, but traditional dashboards create bottlenecks with sequential data loading.",
+                  "Finding high-quality restaurants requires sifting through inconsistent reviews and generic listings. Users need a curated discovery experience that respects their time and preferences.",
                 approach:
-                  "Implemented React Server Components with parallel data fetching and Suspense boundaries. Each dashboard widget streams independently, preventing any single slow query from blocking the entire UI.",
+                  "Designed a filtering system that balances query complexity with performance. The UI prioritizes clarity and trust through deliberate typography and spacing choices rather than flashy animations.",
                 result:
-                  "Dashboard loads 3x faster with streaming architecture. Teams can start interacting with cached data immediately while fresh data progressively enhances the view.",
+                  "Created a search interface that feels intentional and premium. The type system catches errors before they reach users, and the component architecture keeps the codebase maintainable as features expand.",
               }}
             />
 
             <ProjectCard
               number="02"
-              title="Real-time Chat System"
-              description="WebSocket-based chat application with typing indicators, read receipts, and message persistence. Handles 100+ concurrent connections with minimal latency."
-              tech={["React", "Socket.io", "MongoDB", "Express"]}
+              title="Hide Yo Stuff"
+              description="2D stealth-based looting game where players explore procedurally generated homes under time pressure. Features inventory management, NPC interactions, and a weight-based capacity system."
+              tech={["Java", "LibGDX", "Gradle"]}
               features={[
-                "Real-time bidirectional communication",
-                "Markdown support for rich text formatting",
-                "Drag-and-drop file uploads with preview",
-                "End-to-end encryption for secure messaging",
+                "8 unique explorable maps with lootable containers",
+                "Weight-based inventory system with real-time management",
+                "NPC trader system for item exchange and stat upgrades",
+                "Save/load functionality with customizable controls",
               ]}
-              codeUrl="https://github.com/yourusername/chat-system"
-              demoUrl="https://chat-system.vercel.app"
+              codeUrl="https://github.com/Spook65/The-4-Musketeers-Final-Project"
+              demoUrl="https://github.com/Spook65/The-4-Musketeers-Final-Project"
               moduleData={{
                 status: "stable",
                 problem:
-                  "Standard HTTP polling creates unacceptable latency for real-time collaboration. Users expect instant message delivery and live typing feedback without manual refresh.",
+                  "Building a game loop that keeps tension high while allowing strategic decision-making. Players need immediate feedback on inventory constraints without breaking immersion.",
                 approach:
-                  "Built bidirectional WebSocket connection with Socket.io for sub-100ms message delivery. Implemented optimistic UI updates with rollback logic for offline resilience.",
+                  "Implemented a weight-based inventory that forces meaningful choices about what to carry. The trader system creates risk/reward decisions—do you leave now with safe gains or push for better loot?",
                 result:
-                  "Achieved <50ms average message latency with 99.9% delivery reliability. System gracefully handles network interruptions with automatic reconnection and message queue persistence.",
+                  "The countdown timer combined with capacity limits creates natural tension. Multi-module Gradle structure keeps game logic, assets, and platform code cleanly separated for easier debugging.",
               }}
             />
 
             <ProjectCard
               number="03"
-              title="Distributed Task Engine"
-              description="Task management system supporting 500+ concurrent users. Features offline-first architecture with intelligent conflict resolution for collaborative editing."
-              tech={["Next.js", "PostgreSQL", "Redis", "WebSocket"]}
+              title="Ritual Chamber"
+              description="C++ Windows Forms survival game with real-time threat management and resource allocation. Built custom game loop and event system using native Windows GUI components."
+              tech={["C++", "Windows Forms", "Visual Studio"]}
               features={[
-                "Offline-first with local state sync",
-                "Zero-latency updates across clients",
-                "Intelligent conflict resolution",
-                "Real-time collaborative workspaces",
+                "Custom game state machine for location transitions",
+                "Real-time threat AI with configurable behavior patterns",
+                "Resource management tied to player survival mechanics",
+                "Windows Forms integration for GUI-driven gameplay",
               ]}
-              codeUrl="https://github.com/yourusername/task-engine"
-              demoUrl="https://task-engine.vercel.app"
+              codeUrl="https://github.com/Spook65/Final-Project-Graphical-User-Interface"
+              demoUrl="https://github.com/Spook65/Final-Project-Graphical-User-Interface"
               moduleData={{
                 status: "experimental",
                 problem:
-                  "Collaborative task management breaks down under network instability. Users lose work during disconnections, and concurrent edits create data conflicts requiring manual resolution.",
+                  "Windows Forms isn't designed for game development—no built-in game loop, event timing, or sprite rendering. Building game mechanics on top of enterprise UI framework requires creative workarounds.",
                 approach:
-                  "Designed offline-first architecture using operational transformation for conflict-free replicated data. Local-first mutations sync via WebSocket with PostgreSQL as source of truth and Redis for real-time pub/sub.",
+                  "Hijacked the Forms timer system to create a custom game loop. Separated game logic (Player, Rune, Location classes) from UI layer to keep state management predictable despite Forms' event-driven model.",
                 result:
-                  "Users experience zero-latency interactions regardless of connection quality. Conflict resolution happens automatically in 99% of cases using last-write-wins with vector clocks for causal ordering.",
+                  "Proved that game mechanics can work in unconventional frameworks when you understand the platform constraints. The architecture kept OOP principles intact while working around Forms' limitations.",
               }}
             />
           </FadeInSection>
@@ -1416,15 +1456,31 @@ function ProjectCard({
                 <Code2 className="h-4 w-4" />
                 Code
               </a>
-              <a
-                href={demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
-              >
-                <ExternalLink className="h-4 w-4" />
-                Demo
-              </a>
+              {demoUrl ? (
+                <a
+                  href={demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-sm font-medium rounded-sm hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Demo
+                </a>
+              ) : (
+                <div className="relative group/tooltip">
+                  <button
+                    disabled
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/5 text-sm font-medium rounded-sm text-neutral-600 cursor-not-allowed"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Demo
+                  </button>
+                  {/* Tooltip explaining local environment requirement */}
+                  <div className="absolute bottom-full left-0 mb-2 px-3 py-2 bg-neutral-900 border border-white/10 rounded-sm text-xs font-mono text-neutral-400 whitespace-nowrap opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 pointer-events-none">
+                    Local environment required
+                  </div>
+                </div>
+              )}
             </div>
 
             <button
