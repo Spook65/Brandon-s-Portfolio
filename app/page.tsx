@@ -1212,70 +1212,109 @@ function TimelineItem({ section, scrollProgress }: { section: any; scrollProgres
 // Interaction: Hovering one skill highlights it and dims others (CSS-based, no state)
 // Performance: Pure CSS transitions, no JavaScript hover handlers
 function SkillsMap() {
-  const skills = [
-    { name: "React", icon: "⚛️", category: "Frontend" },
-    { name: "TypeScript", icon: "📘", category: "Language" },
-    { name: "Next.js", icon: "▲", category: "Framework" },
-    { name: "Node.js", icon: "🟢", category: "Backend" },
-    { name: "Tailwind", icon: "🎨", category: "Styling" },
-    { name: "PostgreSQL", icon: "🐘", category: "Database" },
-    { name: "Git", icon: "🔱", category: "Tools" },
-    { name: "Framer", icon: "🎬", category: "Animation" },
+  const techStack = [
+    // Core Languages - Foundational programming knowledge
+    {
+      group: "Core Languages",
+      skills: [
+        { name: "C++", icon: "⚙️" },
+        { name: "Java", icon: "☕" },
+        { name: "Python", icon: "🐍" },
+        { name: "TypeScript", icon: "📘" },
+        { name: "JavaScript", icon: "📜" },
+      ],
+    },
+    // Frontend & UI - Interface development and user experience
+    {
+      group: "Frontend & UI",
+      skills: [
+        { name: "React", icon: "⚛️" },
+        { name: "Next.js", icon: "▲" },
+        { name: "Tailwind CSS", icon: "🎨" },
+        { name: "Recharts", icon: "📊" },
+      ],
+    },
+    // Backend & Systems - Server-side logic and data management
+    {
+      group: "Backend & Systems",
+      skills: [
+        { name: "FastAPI", icon: "⚡" },
+        { name: "REST APIs", icon: "🔌" },
+        { name: "MongoDB", icon: "🍃" },
+        { name: "Prisma", icon: "🔷" },
+      ],
+    },
+    // Tooling & Practices - Development workflow and project structure
+    {
+      group: "Tooling & Practices",
+      skills: [
+        { name: "Git", icon: "🔱" },
+        { name: "GitHub", icon: "🐙" },
+        { name: "Environment Config", icon: "⚙️" },
+        { name: "Local Testing", icon: "🧪" },
+      ],
+    },
+    // Security & Systems - Security-aware development and system fundamentals
+    {
+      group: "Security & Systems",
+      skills: [
+        { name: "System Admin", icon: "🔒" },
+        { name: "Network Concepts", icon: "🌐" },
+        { name: "Secure Coding", icon: "🛡️" },
+        { name: "Access Control", icon: "🔑" },
+      ],
+    },
   ]
 
   return (
-    <div className="skill-map-container group/map">
-      {/* Grid layout creates spatial relationships between skills
-          Gap provides breathing room, auto-fit ensures responsiveness */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-        {skills.map((skill) => (
-          <div
-            key={skill.name}
-            className="skill-card relative p-6 md:p-8 border border-white/5 rounded-sm
-                     transition-all duration-300 cursor-default
-                     hover:border-white/30 hover:bg-white/[0.02] hover:scale-105
-                     group-hover/map:opacity-40 hover:!opacity-100"
-          >
-            {/* Hover logic:
-                - All cards start at full opacity
-                - When ANY card is hovered (group-hover/map), all cards dim to 40% opacity
-                - The hovered card itself uses !opacity-100 to override the dim
-                - This creates the "highlight one, dim others" effect without JavaScript */}
-
-            {/* Icon grows on hover with slight rotation for playful effect */}
-            <div
-              className="text-4xl md:text-5xl mb-4 transition-transform duration-300
-                          group-hover:scale-110 group-hover:rotate-3"
-            >
-              {skill.icon}
-            </div>
-
-            {/* Skill name and category with staggered color transitions */}
-            <div className="space-y-1">
-              <div
-                className="font-medium text-sm md:text-base text-neutral-300
-                            group-hover:text-white transition-colors duration-300"
-              >
-                {skill.name}
-              </div>
-              <div
-                className="font-mono text-xs text-neutral-600
-                            group-hover:text-neutral-500 transition-colors duration-300"
-              >
-                {skill.category}
-              </div>
-            </div>
-
-            {/* Subtle corner accent that appears on hover */}
-            <div
-              className="absolute top-0 right-0 w-0 h-0
-                          group-hover:w-3 group-hover:h-3
-                          border-t-2 border-r-2 border-white/30
-                          transition-all duration-300"
-            />
+    <div className="skill-map-container space-y-12">
+      {techStack.map((category, idx) => (
+        <FadeInSection key={category.group} delay={100 * idx}>
+          {/* Category header with monospace styling */}
+          <div className="mb-6">
+            <h3 className="font-mono text-sm text-neutral-400 mb-2">{category.group}</h3>
+            <div className="h-px bg-white/5" />
           </div>
-        ))}
-      </div>
+
+          {/* Grid of skills within this category
+              Hover logic: dim all cards when any is hovered, then un-dim the hovered card */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 group/category">
+            {category.skills.map((skill) => (
+              <div
+                key={skill.name}
+                className="relative p-4 md:p-6 border border-white/5 rounded-sm
+                         transition-all duration-300 cursor-default
+                         hover:border-white/30 hover:bg-white/[0.02] hover:scale-105
+                         group-hover/category:opacity-40 hover:!opacity-100"
+              >
+                {/* Icon with subtle hover animation */}
+                <div
+                  className="text-3xl md:text-4xl mb-3 transition-transform duration-300
+                            group-hover:scale-110"
+                >
+                  {skill.icon}
+                </div>
+
+                {/* Skill name */}
+                <div
+                  className="font-medium text-sm text-neutral-300
+                            group-hover:text-white transition-colors duration-300"
+                >
+                  {skill.name}
+                </div>
+
+                {/* Subtle corner accent on hover */}
+                <div
+                  className="absolute top-0 right-0 w-0 h-0
+                            group-hover:w-2 group-hover:h-2
+                            border-t-2 border-r-2 border-white/30
+                            transition-all duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </FadeInSection>
+      ))}
     </div>
   )
 }
