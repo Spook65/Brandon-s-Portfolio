@@ -918,7 +918,7 @@ export default function Portfolio() {
                             Built Mapetite—a React/TypeScript restaurant discovery platform integrating external APIs
                             with client-side state management.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Spring 2024</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Fall 2025</span>
                         </div>
                       </div>
                     </div>
@@ -941,7 +941,7 @@ export default function Portfolio() {
                             Developed Hide Yo Stuff in Java/LibGDX—implementing inventory systems, collision detection,
                             and game loop architecture for 2D exploration.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Summer 2024</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Fall 2025</span>
                         </div>
                       </div>
                     </div>
@@ -962,7 +962,7 @@ export default function Portfolio() {
                             Deepened understanding of secure coding, access control, and network security through
                             coursework and independent study.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Fall 2024</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Fall 2025</span>
                         </div>
                       </div>
                     </div>
@@ -983,7 +983,7 @@ export default function Portfolio() {
                             Led initiatives in Alpha Phi Omega—managing logistics, team communication, and event
                             execution. These skills translate directly to technical project management.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">2023-2024</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">2025</span>
                         </div>
                       </div>
                     </div>
@@ -1004,7 +1004,7 @@ export default function Portfolio() {
                             Exploring AI-assisted development, local-first architectures, and scalable system design
                             patterns for maintainable software.
                           </p>
-                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Spring 2025</span>
+                          <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Fall 2025</span>
                         </div>
                       </div>
                     </div>
