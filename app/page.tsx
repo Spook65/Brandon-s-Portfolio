@@ -816,9 +816,8 @@ export default function Portfolio() {
                 <div>
                   <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">BACKGROUND</h3>
                   <p className="text-lg text-neutral-300 leading-relaxed">
-                    I'm a third-year Computer Science student with a concentration in cybersecurity. My focus is on
-                    building complete systems rather than isolated features — from frontend interfaces to backend APIs
-                    to system-level logic.
+                    Third-year Computer Science student concentrating in cybersecurity. I build complete
+                    systems—frontend, backend, and logic—not isolated features.
                   </p>
                 </div>
 
@@ -826,14 +825,13 @@ export default function Portfolio() {
                 <div>
                   <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">APPROACH</h3>
                   <p className="text-neutral-400 leading-relaxed mb-4">
-                    I've developed projects ranging from local-first applications and interactive dashboards to
-                    graphical games and AI-assisted tools. Many run in controlled local environments intentionally —
-                    reflecting real-world constraints like API dependencies, security considerations, and development
+                    My projects span web applications, graphical games, and AI-assisted tools. Many run locally by
+                    design—reflecting real constraints like API dependencies, security requirements, and development
                     realism.
                   </p>
                   <p className="text-neutral-400 leading-relaxed">
-                    My work emphasizes clarity, modularity, and realistic constraints. I focus on systems that are
-                    maintainable, testable, and adaptable — whether deployed publicly or designed for local execution.
+                    I prioritize maintainable, testable systems built with clarity and modularity, whether deployed
+                    publicly or designed for controlled environments.
                   </p>
                 </div>
 
@@ -864,9 +862,8 @@ export default function Portfolio() {
                 <div>
                   <h3 className="font-mono text-xs tracking-wider text-neutral-500 mb-3">BEYOND CODE</h3>
                   <p className="text-neutral-400 leading-relaxed">
-                    Leadership roles in Alpha Phi Omega strengthened my ability to plan, coordinate, and execute complex
-                    initiatives — skills I apply directly to software projects and team-based development. As a
-                    first-generation college student, I'm driven by continuous growth and intentional learning.
+                    Leadership in Alpha Phi Omega taught me to plan, coordinate, and execute complex initiatives—skills
+                    I apply directly to technical projects and team collaboration.
                   </p>
                 </div>
 
@@ -916,10 +913,10 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">First Complete Full-Stack Project</h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">First Full-Stack System</h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Built Mapetite, a restaurant discovery platform with React/TypeScript, integrating external
-                            APIs and implementing client-side state management patterns.
+                            Built Mapetite—a React/TypeScript restaurant discovery platform integrating external APIs
+                            with client-side state management.
                           </p>
                           <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Spring 2024</span>
                         </div>
@@ -938,11 +935,11 @@ export default function Portfolio() {
 
                         <div className="flex-1 space-y-2">
                           <h3 className="text-xl font-semibold text-neutral-200">
-                            Exploring Game Architecture & State
+                            Game Architecture & State Management
                           </h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Developed Hide Yo Stuff in Java/LibGDX, implementing inventory systems, collision detection,
-                            and game loop patterns for 2D exploration mechanics.
+                            Developed Hide Yo Stuff in Java/LibGDX—implementing inventory systems, collision detection,
+                            and game loop architecture for 2D exploration.
                           </p>
                           <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Summer 2024</span>
                         </div>
@@ -960,10 +957,10 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">Cybersecurity Fundamentals</h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">Cybersecurity Foundations</h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Deepened understanding of secure coding practices, access control mechanisms, and network
-                            security principles through coursework and independent study.
+                            Deepened understanding of secure coding, access control, and network security through
+                            coursework and independent study.
                           </p>
                           <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Fall 2024</span>
                         </div>
@@ -981,10 +978,10 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">Leadership & Coordination Skills</h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">Leadership & Project Coordination</h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Held leadership roles in Alpha Phi Omega, managing logistics, event coordination, and team
-                            communication—skills that translate directly to technical project management.
+                            Led initiatives in Alpha Phi Omega—managing logistics, team communication, and event
+                            execution. These skills translate directly to technical project management.
                           </p>
                           <span className="inline-block font-mono text-xs text-neutral-600 mt-2">2023-2024</span>
                         </div>
@@ -1002,12 +999,10 @@ export default function Portfolio() {
                         </div>
 
                         <div className="flex-1 space-y-2">
-                          <h3 className="text-xl font-semibold text-neutral-200">
-                            AI-Assisted Development & Systems Thinking
-                          </h3>
+                          <h3 className="text-xl font-semibold text-neutral-200">Systems Thinking & AI Tooling</h3>
                           <p className="text-sm text-neutral-500 leading-relaxed">
-                            Experimenting with AI-assisted tooling, building local-first applications, and exploring
-                            system architecture patterns for scalable, maintainable software design.
+                            Exploring AI-assisted development, local-first architectures, and scalable system design
+                            patterns for maintainable software.
                           </p>
                           <span className="inline-block font-mono text-xs text-neutral-600 mt-2">Spring 2025</span>
                         </div>
@@ -1160,7 +1155,7 @@ export default function Portfolio() {
                 "Type-safe architecture with comprehensive validation",
               ]}
               codeUrl="https://github.com/Spook65/Mapetite"
-              demoUrl="https://github.com/Spook65/Mapetite"
+              // demoUrl="https://github.com/Spook65/Mapetite"
               moduleData={{
                 status: "production",
                 problem:
@@ -1184,7 +1179,7 @@ export default function Portfolio() {
                 "Save/load functionality with customizable controls",
               ]}
               codeUrl="https://github.com/Spook65/The-4-Musketeers-Final-Project"
-              demoUrl="https://github.com/Spook65/The-4-Musketeers-Final-Project"
+              // demoUrl="https://github.com/Spook65/The-4-Musketeers-Final-Project"
               moduleData={{
                 status: "stable",
                 problem:
@@ -1208,7 +1203,7 @@ export default function Portfolio() {
                 "Windows Forms integration for GUI-driven gameplay",
               ]}
               codeUrl="https://github.com/Spook65/Final-Project-Graphical-User-Interface"
-              demoUrl="https://github.com/Spook65/Final-Project-Graphical-User-Interface"
+              // demoUrl="https://github.com/Spook65/Final-Project-Graphical-User-Interface"
               moduleData={{
                 status: "experimental",
                 problem:
