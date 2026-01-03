@@ -114,4 +114,4 @@ See live portfolio for full project details, technical breakdowns, and code repo
 
 ---
 
-**Third-year Computer Science student** with interests in cybersecurity, systems programming, and full-stack development. Open to Summer 2025 internships in software engineering, security, or systems roles.
+**Fourth-Year Computer Science student** with interests in cybersecurity, systems programming, and full-stack development. Open to Summer 2025 internships in software engineering, security, or systems roles.
