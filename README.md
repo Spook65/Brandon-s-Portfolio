@@ -1,82 +1,57 @@
-# Systems Portfolio
+# Portfolio — Brandon H
 
-A performance-focused personal portfolio emphasizing engineering principles, intentional design, and systems thinking.
+Personal portfolio showcasing systems-focused projects and engineering approach. Built to demonstrate clean architecture, performance-conscious UI design, and full-stack capabilities.
 
-## Overview
+## What This Is
 
-This portfolio was built to showcase real projects with working deployments, not mock demos or tutorials. Every feature serves a purpose—from scroll-driven animations to easter eggs—and the codebase reflects production-grade patterns I'd use in a real engineering environment.
+A Next.js portfolio application highlighting three complete projects (web app, 2D game, C++ GUI game) with emphasis on technical depth, realistic constraints, and maintainable code. Designed to be recruiter-skimmable while providing engineering detail for technical reviewers.
 
 ## Tech Stack
 
-### Core
-- **Next.js 16** – React framework with App Router and Server Components
-- **TypeScript** – Type safety and better developer experience
-- **Tailwind CSS v4** – Utility-first styling with performance optimizations
-- **Framer Motion** – GPU-accelerated animations and scroll effects
+**Framework**: Next.js 16 (App Router, React 19, TypeScript)  
+**Styling**: Tailwind CSS v4 with custom design tokens  
+**Animations**: Framer Motion for scroll-driven UI  
+**UI Components**: Radix UI primitives + shadcn/ui patterns  
+**Deployment**: Vercel (automatic deployments from main branch)
 
-### Key Dependencies
-- **Lucide React** – Consistent icon system
-- **Radix UI** – Accessible component primitives
-- **React Hook Form + Zod** – Type-safe form validation
+## System Architecture
 
-### Deployment
-- **Vercel** – Zero-config deployments with edge runtime support
-- **Vercel Analytics** – Performance monitoring in production
+### Frontend
+- Server Components for static content sections
+- Client Components for interactive features (scroll timeline, systems mode toggle)
+- IntersectionObserver API for viewport-triggered animations (no scroll listeners)
+- CSS-based hover effects using Tailwind's group-hover pattern
 
-## Features
+### State Management
+- Local React state for UI toggles (systems mode, project inspectors, sidebar panels)
+- localStorage for persistent preferences (dismissed tooltips, systems mode state)
+- Framer Motion's useScroll/useTransform for scroll-linked animations
 
-### Core Functionality
-- **Scroll Timeline Indicator** – Real-time section tracking using Framer Motion's scroll hooks
-- **Systems Mode** – Toggle engineering aesthetic with keyboard shortcuts (S key)
-- **Project Inspector** – Expandable engineering depth panels for each project
-- **System Log** – Terminal-style activity tracker using IntersectionObserver
-- **Easter Egg** – Konami-style sequence detection (↑ ↑ ↓ ↓ A or Ctrl+Shift+E)
+### Performance
+- Passive event listeners for scroll/touch handlers
+- GPU-accelerated CSS transforms (translateY, scale, opacity)
+- Lazy fade-in animations triggered by IntersectionObserver
+- No canvas rendering or heavy JavaScript effects
 
-### Performance Optimizations
-- **Intersection Observer API** – No scroll listeners, viewport detection only
-- **GPU-accelerated animations** – CSS transforms for 60fps scrolling
-- **Lazy-loaded sections** – Fade-in animations trigger on viewport entry
-- **Passive event listeners** – Non-blocking scroll and touch handlers
+## Key Features
 
-### Design Philosophy
-- **Editorial typography** – Large display type with intentional hierarchy
-- **Minimal color palette** – Neutral grays with blue accents for focus
-- **Spatial layout** – Grid-based skills map with CSS hover interactions
-- **Terminal aesthetic** – Monospace fonts and system-style status indicators
+**Scroll Timeline Indicator** — Vertical timeline showing current section position, built with Framer Motion's scroll progress hooks
 
-## Project Structure
+**Systems Mode** — Toggle engineering aesthetic (keyboard shortcut: S key) that applies visual changes via CSS class
 
-```
-app/
-├── page.tsx          # Main portfolio component
-├── layout.tsx        # Root layout with metadata
-└── globals.css       # Design tokens and base styles
+**Project Inspector** — Expandable panels showing Problem/Approach/Result for each project without layout shift
 
-components/
-└── ui/               # Radix UI components (accordion, button, etc.)
-```
+**System Log** — Terminal-style activity tracker using IntersectionObserver to log section visibility
 
-## Key Design Decisions
+**Easter Egg** — Konami-style sequence detector (↑ ↑ ↓ ↓ A or Ctrl+Shift+E) with toast notification
 
-### Why IntersectionObserver over scroll events?
-Scroll events fire dozens of times per second and require manual throttling. IntersectionObserver is callback-based, fires only when elements cross viewport boundaries, and doesn't block the main thread.
-
-### Why CSS-only hover effects for skills?
-JavaScript state management for hover would trigger re-renders across the component tree. Using `group-hover` in Tailwind keeps all logic in CSS, ensuring 60fps interactions without React reconciliation overhead.
-
-### Why Systems Mode?
-Provides an intentional way to add visual depth without cluttering the default view. Users who appreciate engineering details can opt-in via keyboard shortcut, while others experience a clean, distraction-free portfolio.
-
-### Why Framer Motion?
-Offers declarative scroll animations with automatic GPU acceleration. The `useScroll` and `useTransform` hooks provide smooth, performant parallax effects without manual requestAnimationFrame management.
-
-## Development
+## Local Setup
 
 ```bash
 # Install dependencies
 npm install
 
-# Run development server
+# Run development server (localhost:3000)
 npm run dev
 
 # Build for production
@@ -86,25 +61,52 @@ npm run build
 npm start
 ```
 
-## Design Principles
+**Note**: This portfolio is deployed publicly. No API keys or environment variables required for local development.
 
-### Systems Thinking
-Every UI decision considers trade-offs. Animations are intentional, not decorative. Features solve real problems (e.g., scroll timeline for long-form content navigation).
+## Technical Decisions
 
-### Performance First
-No client-side scroll listeners. No canvas-based particle effects. No heavy JavaScript for effects achievable in CSS. Every animation runs on the compositor thread.
+### Why IntersectionObserver instead of scroll events?
+Scroll events fire 30-60 times per second and require manual throttling. IntersectionObserver is callback-based, fires only at viewport boundaries, and doesn't block the main thread. Better for performance and battery life.
 
-### Intentional Aesthetics
-Dark theme reduces eye strain during extended reading. Monospace fonts signal technical content. Generous whitespace creates visual breathing room. Editorial typography establishes hierarchy without relying on color.
+### Why CSS-only hover effects for the skills map?
+JavaScript state for hover interactions triggers React re-renders. Using Tailwind's `group-hover` keeps all logic in CSS, ensuring 60fps interactions without reconciliation overhead.
 
-### Accessibility
-Semantic HTML throughout. Keyboard navigation for all interactive elements. Focus states for keyboard users. No reliance on hover-only interactions. Screen reader-friendly markup.
+### Why Framer Motion over custom scroll listeners?
+Provides declarative scroll animations with automatic GPU acceleration. The useScroll and useTransform hooks handle scroll progress calculations and transform interpolation without manual requestAnimationFrame management.
 
-## Deployment
+### Why no production metrics or user counts?
+This is a student portfolio, not a SaaS product. The focus is on engineering decisions, architecture, and code quality—skills that translate to professional environments without fabricating scale.
 
-Live at: [Your Vercel URL]
+## What This Demonstrates
 
-Connected to GitHub via Vercel's Git integration. Pushes to `main` trigger automatic deployments with preview URLs for pull requests.
+**System-level thinking** — Every UI decision considers trade-offs (animation cost, bundle size, accessibility)
+
+**Performance-first approach** — No client-side scroll listeners, no canvas effects, all animations run on compositor thread
+
+**Clean architecture** — Separation of concerns (components, state, styles), reusable patterns, maintainable structure
+
+**Honest positioning** — Clear about student status, realistic constraints, and local-first projects where applicable
+
+## Limitations & Future Improvements
+
+**Current constraints:**
+- Projects showcased are academic/personal (not production systems with real users)
+- Some project demos require local setup (API keys, environment config)
+- Systems Mode requires JavaScript enabled (degrades gracefully)
+
+**Potential enhancements:**
+- Add blog section with technical writing samples
+- Integrate real-time activity monitoring (GitHub commits, learning progress)
+- Build custom CMS for dynamic project updates
+- Add automated accessibility testing in CI/CD pipeline
+
+## Projects Featured
+
+**Mapetite** — Restaurant discovery web app (React/TypeScript)  
+**Hide Yo Stuff** — 2D stealth looting game (Java/LibGDX)  
+**Ritual Chamber** — C++ Windows Forms survival game
+
+See live portfolio for full project details, technical breakdowns, and code repositories.
 
 ## License
 
@@ -112,4 +114,4 @@ Connected to GitHub via Vercel's Git integration. Pushes to `main` trigger autom
 
 ---
 
-Built with intention. No AI templates, no starter kits—just engineering principles applied to personal branding.
+**Third-year Computer Science student** with interests in cybersecurity, systems programming, and full-stack development. Open to Summer 2025 internships in software engineering, security, or systems roles.
